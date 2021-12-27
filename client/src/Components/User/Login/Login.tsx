@@ -1,92 +1,66 @@
-import React from "react";
-// import React, { useState, useEffect } from "react";
-// import { useMutation } from "@apollo/client";
-import { useFormik } from 'formik';
+import React, { useEffect, useState } from "react";
+import { useMutation } from "@apollo/client";
+import { useFormik } from "formik";
 
 import { Header, Footer } from "../../Shell";
-import { type } from "os";
-// import { LOGIN_USER } from "../../../graph/mutations";
 
-// import Auth from "../../../services/auth";
+import { LOGIN_USER } from "../../../graph/mutations";
+
+import Auth from "../../../services/auth";
 
 interface FormValues {
   email: string;
   password: string;
-} 
+}
 
 interface FormErrors {
   email?: string;
   password?: string;
-} 
+}
 
 const Login = () => {
-  // const [userFormData, setUserFormData] = useState({ email: "", password: "" });
-  // const [validated] = useState(false);
-  // const [showAlert, setShowAlert] = useState(false);
+  const [login, { error }] = useMutation(LOGIN_USER);
+  const [showError, setShowError] = useState(false);
 
-  // const [login, { error }] = useMutation(LOGIN_USER);
-
-  // useEffect(() => {
-  //   if (error) {
-  //     setShowAlert(true);
-  //   } else {
-  //     setShowAlert(false);
-  //   }
-  // }, [error]);
-
-  // const handleInputChange = (event: any) => {
-  //   const { name, value } = event.target;
-  //   setUserFormData({ ...userFormData, [name]: value });
-  // };
-
-  // const handleFormSubmit = async (event: any) => {
-  //   event.preventDefault();
-
-  //   const form = event.currentTarget;
-  //   if (form.checkValidity() === false) {
-  //     event.preventDefault();
-  //     event.stopPropagation();
-  //   }
-
-  //   try {
-  //     const { data } = await login({
-  //       variables: { ...userFormData },
-  //     });
-
-  //     console.log(data);
-  //     Auth.login(data.login.token);
-  //   } catch (e) {
-  //     console.error(e);
-  //   }
-
-  //   // clear form values
-  //   setUserFormData({
-  //     email: "",
-  //     password: "",
-  //   });
-  // };
+  useEffect(() => {
+    if (error) {
+      setShowError(true);
+    } else {
+      setShowError(false);
+    }
+  }, [error]);
 
   const validate = (values: FormValues) => {
+    setShowError(false);
     const errors: FormErrors = {};
     if (!values.email) {
-      errors.email = 'Email is required';
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-      errors.email = 'Invalid email address';
+      errors.email = "Email is required";
+    } else if (
+      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+    ) {
+      errors.email = "Invalid email address";
     }
     if (!values.password) {
-      errors.password = 'Password is required';
-    } 
+      errors.password = "Password is required";
+    }
     return errors;
   };
 
   const formik = useFormik({
     initialValues: {
-      email: '',
-      password: ''
+      email: "",
+      password: "",
     },
     validate,
-    onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: async (values) => {
+      try {
+        const { data } = await login({
+          variables: { ...values },
+        });
+        Auth.login(data.login.token);
+      } catch (e) {
+        console.log(e);
+      }
     },
   });
 
@@ -106,9 +80,15 @@ const Login = () => {
                   name="email"
                   id="email"
                   onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
                   value={formik.values.email}
                 />
-                {formik.errors.email ? <span className="error-text"><i className="fas fa-exclamation-circle"></i>{formik.errors.email}</span> : null}
+                {formik.touched.email && formik.errors.email ? (
+                  <span className="error-text">
+                    <i className="fas fa-exclamation-circle"></i>
+                    {formik.errors.email}
+                  </span>
+                ) : null}
               </div>
               <div className="form-group">
                 <label htmlFor="missionStatement">Your password</label>
@@ -119,9 +99,21 @@ const Login = () => {
                   name="password"
                   id="password"
                   onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
                   value={formik.values.password}
                 />
-                {formik.errors.password ? <span className="error-text"><i className="fas fa-exclamation-circle"></i>{formik.errors.password}</span> : null}
+                {formik.touched.password && formik.errors.password ? (
+                  <span className="error-text">
+                    <i className="fas fa-exclamation-circle"></i>
+                    {formik.errors.password}
+                  </span>
+                ) : null}
+                {showError && (
+                  <span className="error-text">
+                    <i className="fas fa-exclamation-circle"></i>
+                    Login failed. Please try again
+                  </span>
+                )}
               </div>
               <button type="submit" className="form-button">
                 Login
@@ -130,8 +122,8 @@ const Login = () => {
           </div>
           <div className="page-description">
             <p className="page-text">
-              <span className="page-title">Charity Login:</span> Please enter your email address and
-                password to access your charity account.
+              <span className="page-title">Charity Login:</span> Please enter
+              your email address and password to access your charity account.
             </p>
           </div>
         </div>
