@@ -1,0 +1,68 @@
+.main-banner-container {
+  display: flex;
+  margin: 50px 0;
+}
+.main-banner-container div:nth-child(1) {
+  align-self: center;
+  flex: 1;
+}
+.main-banner-container div:nth-child(1) h2 {
+  color: #3f3c4d;
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 25px;
+}
+.main-banner-container div:nth-child(1) p {
+  color: #858688;
+  font-size: 18px;
+  font-weight: 200;
+  line-height: 26px;
+  margin-bottom: 20px;
+}
+.main-banner-container div:nth-child(2) {
+  background: url(../../assets/images/main-banner.png) right 0 no-repeat;
+  background-size: 400px;
+  flex: 0 440px;
+  height: 368px;
+}
+span.donate-now-button {
+  position: relative;
+  display: inline-flex;
+  width: 160px;
+  height: 55px;
+  margin: 0;
+  perspective: 1000px;
+}
+span.donate-now-button a {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  transform-style: preserve-3d;
+  transform: translateZ(-25px);
+  transition: transform 0.25s;
+}
+span.donate-now-button a:before,
+span.donate-now-button a:after {
+  position: absolute;
+  content: "Donate Now!";
+  height: 55px;
+  width: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 5px solid #3ebcd3;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+span.donate-now-button a:before {
+  color: #fff;
+  background: #3ebcd3;
+  transform: rotateY(0deg) translateZ(25px);
+}
+span.donate-now-button a:after {
+  color: #3ebcd3;
+  transform: rotateX(90deg) translateZ(25px);
+}
+span.donate-now-button a:hover {
+  transform: translateZ(-25px) rotateX(-90deg);
+}

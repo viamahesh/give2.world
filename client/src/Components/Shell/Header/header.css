@@ -1,0 +1,39 @@
+header {
+    background: url('../../../assets/images/g2w-logo.png') center no-repeat;
+    background-size: 160px 146px;
+    height: 158px;
+    position: relative;
+  }
+  .header-nav {
+    color: #ffffff;
+    position: absolute;
+    top: 33px;
+    width: 200px;
+  }
+  .header-nav span {
+    display: block;
+    width: 100%;
+  }
+  .header-nav span:nth-child(1) {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  .header-nav span:nth-child(1) i {
+    margin-right: 10px;
+  }
+  .header-nav span:nth-child(2) {
+    font-size: 12px;
+    font-weight: 400;
+    text-indent: 24px;
+  }
+  .add-button,
+  .donate-button {
+    position: absolute;
+  }
+  .add-button {
+    left: 610px;
+  }
+  .donate-button {
+    left: 218px;
+  }
