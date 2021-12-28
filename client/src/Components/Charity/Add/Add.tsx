@@ -307,7 +307,8 @@ const AddCharity: React.FC = () => {
               </div>
               <div className="form-group">
                 <label htmlFor="zipCode">Zip Code</label>
-                <input
+                <MaskedInput
+                  mask={[/\d/, /\d/, /\d/, /\d/, /\d/]}
                   type="text"
                   className="form-control"
                   id="zipCode"
@@ -315,7 +316,6 @@ const AddCharity: React.FC = () => {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.zipCode}
-                  maxLength={5}
                 />
                 {formik.touched.zipCode && formik.errors.zipCode ? (
                   <span className="error-text">
