@@ -33,14 +33,14 @@ label {
   margin-bottom: 25px;
 }
 .form-control {
-  background-color: #fff;
+  background-color: #ffffff;
   border: none;
   border-radius: .25rem;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
   color: #495057;
   display: block;
   font-family: 'Work Sans', sans-serif;
-  font-size: 1rem;
+  font-size: 14px;
   font-weight: 400;
   height: 35px;
   line-height: 35px;
@@ -60,6 +60,36 @@ label {
 }
 .form-button:hover {
   cursor: pointer;
+}
+.select-container {
+  position: relative;
+}
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: #ffffff;
+  border: none;
+  border-radius: .25rem;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+  color: #495057;  
+  font-family: 'Work Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 35px;
+  padding: 5px 15px;
+  width: 100%;
+}
+/* For IE <= 11 */
+select::-ms-expand {
+  display: none; 
+}
+.select-icon {
+  position: absolute;
+  top: 40px;
+  right: -4px;
+  width: 30px;
+  height: 36px;
 }
 /* headings */
 .page-container {
