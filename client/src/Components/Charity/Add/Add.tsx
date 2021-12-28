@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { useFormik } from "formik";
+import MaskedInput from "react-text-mask";
 
 import { Header, Footer } from "../../Shell";
 
@@ -37,6 +38,22 @@ interface FormErrors {
 const AddCharity: React.FC = () => {
   const [addCharity, { error }] = useMutation(ADD_CHARITY);
   const [showError, setShowError] = useState(false);
+  const phoneNumberMask = [
+    "(",
+    /[1-9]/,
+    /\d/,
+    /\d/,
+    ")",
+    " ",
+    /\d/,
+    /\d/,
+    /\d/,
+    "-",
+    /\d/,
+    /\d/,
+    /\d/,
+    /\d/
+  ];
 
   useEffect(() => {
     if (error) {
@@ -345,7 +362,8 @@ const AddCharity: React.FC = () => {
               </div>
               <div className="form-group">
                 <label htmlFor="phone">Phone</label>
-                <input
+                <MaskedInput
+                  mask={phoneNumberMask}
                   type="text"
                   className="form-control"
                   id="phone"
