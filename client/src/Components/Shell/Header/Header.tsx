@@ -1,8 +1,13 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import "./header.css";
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
+
+import UserProvider, { UserContext } from '../../../providers';
+
+import './header.css';
 
 const Header: React.FC = () => {
+  const { userData } = useContext(UserContext);
+  console.log(userData);
   return (
     <header>
       <Link to="/charity/add" className="header-nav add-button">
@@ -21,4 +26,8 @@ const Header: React.FC = () => {
   );
 };
 
-export default Header;
+export default () => (
+  <UserProvider>
+    <Header />
+  </UserProvider>
+);

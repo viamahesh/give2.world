@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { useMutation } from "@apollo/client";
-import { useFormik } from "formik";
+import React, { useEffect, useState, useContext } from 'react';
+import { useFormik } from 'formik';
 
-import { Header, Footer } from "../../Shell";
+import { Header, Footer } from '../../Shell';
+import { login } from '../../../hooks';
 
-import { LOGIN_USER } from "../../../graph/mutations";
-
-import Auth from "../../../services/auth";
+import Auth from '../../../services/auth';
+import UserProvider, { UserContext } from '../../../providers';
 
 interface FormValues {
   email: string;
@@ -19,8 +18,9 @@ interface FormErrors {
 }
 
 const Login = () => {
-  const [login, { error }] = useMutation(LOGIN_USER);
+  const { doLogin, error } = login();
   const [showError, setShowError] = useState(false);
+  const { setUserData } = useContext(UserContext);
 
   useEffect(() => {
     if (error) {
@@ -34,29 +34,30 @@ const Login = () => {
     setShowError(false);
     const errors: FormErrors = {};
     if (!values.email) {
-      errors.email = "Email is required";
+      errors.email = 'Email is required';
     } else if (
       !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
     ) {
-      errors.email = "Invalid email address";
+      errors.email = 'Invalid email address';
     }
     if (!values.password) {
-      errors.password = "Password is required";
+      errors.password = 'Password is required';
     }
     return errors;
   };
 
   const formik = useFormik({
     initialValues: {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
     },
     validate,
     onSubmit: async (values) => {
       try {
-        const { data } = await login({
+        const { data } = await doLogin({
           variables: { ...values },
         });
+        setUserData(data);
         Auth.login(data.login.token);
       } catch (e) {
         console.log(e);
@@ -131,4 +132,8 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default () => (
+  <UserProvider>
+    <Login />
+  </UserProvider>
+);
