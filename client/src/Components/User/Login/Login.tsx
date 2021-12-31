@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useFormik } from 'formik';
+import { useNavigate } from 'react-router-dom';
 
 import { Header, Footer } from '../../Shell';
 import { login } from '../../../hooks';
 
 import Auth from '../../../services/auth';
-import UserProvider, { UserContext } from '../../../providers';
+import { UserContext } from '../../../providers';
 
 interface FormValues {
   email: string;
@@ -21,6 +22,7 @@ const Login = () => {
   const { doLogin, error } = login();
   const [showError, setShowError] = useState(false);
   const { setUserData } = useContext(UserContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (error) {
@@ -57,8 +59,9 @@ const Login = () => {
         const { data } = await doLogin({
           variables: { ...values },
         });
-        setUserData(data);
+        setUserData(data.login);
         Auth.login(data.login.token);
+        navigate('/charity/add');
       } catch (e) {
         console.log(e);
       }
@@ -132,8 +135,4 @@ const Login = () => {
   );
 };
 
-export default () => (
-  <UserProvider>
-    <Login />
-  </UserProvider>
-);
+export default Login;

@@ -1,7 +1,7 @@
 import decode from 'jwt-decode';
 
 class AuthService {
-  // get user data
+
   getProfile() {
     return decode(this.getToken());
   }
@@ -28,7 +28,6 @@ class AuthService {
 
   login(idToken) {
     localStorage.setItem('id_token', idToken);
-    window.location.assign('/charity/add');
   }
 
   logout() {

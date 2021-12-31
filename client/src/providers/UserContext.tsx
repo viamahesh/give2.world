@@ -28,7 +28,7 @@ export const UserContext = createContext<UserContextInterface>(
 
 const UserProvider = ({ children }: { children?: ReactNode }) => {
   const [userData, setUserData] = useState<UserResponse | null>(userContextDefaultValues.userData);
-
+  
   return (
     <UserContext.Provider value={{userData, setUserData}}>
       {children}
