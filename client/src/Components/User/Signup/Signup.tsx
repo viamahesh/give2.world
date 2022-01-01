@@ -1,17 +1,18 @@
-import React, { useEffect, useState, useContext } from "react";
-import { useFormik } from "formik";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState, useContext } from 'react';
+import { useFormik } from 'formik';
+import { useNavigate } from 'react-router-dom';
 
-import { Footer, Header } from "../../Shell";
-import { signUp } from "../../../hooks";
+import { Footer, Header } from '../../Shell';
+import { signUp } from '../../../hooks';
 
-import Auth from "../../../services/auth";
+import Auth from '../../../services/auth';
 
 interface FormValues {
   firstName: string;
   lastName: string;
   email: string;
   password: string;
+  confirmPassword: string;
 }
 
 interface FormErrors {
@@ -19,6 +20,7 @@ interface FormErrors {
   lastName?: string;
   email?: string;
   password?: string;
+  confirmPassword?: string;
 }
 
 const SignUp = () => {
@@ -37,31 +39,42 @@ const SignUp = () => {
   const validate = (values: FormValues) => {
     setShowError(false);
     const errors: FormErrors = {};
+    const passwordRegex = /(?=.*[0-9])/;
     if (!values.firstName) {
-      errors.password = "First name is required";
+      errors.firstName = 'First name is required';
     }
     if (!values.lastName) {
-      errors.password = "Lasst name is required";
+      errors.lastName = 'Last name is required';
     }
     if (!values.email) {
-      errors.email = "Email is required";
+      errors.email = 'Email is required';
     } else if (
       !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
     ) {
-      errors.email = "Invalid email address";
+      errors.email = 'Invalid email address';
     }
     if (!values.password) {
-      errors.password = "Password is required";
+      errors.password = 'Password is required';
+    } else if (values.password.length < 8) {
+      errors.password = 'Password must be 8 characters long';
+    } else if (!passwordRegex.test(values.password)) {
+      errors.password = 'Invalid password. Must contain one number';
+    }
+    if (values.password && values.confirmPassword) {
+      if (values.password !== values.confirmPassword) {
+        errors.confirmPassword = "Password not matched";
+      }
     }
     return errors;
   };
 
   const formik = useFormik({
     initialValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: "",
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
     },
     validate,
     onSubmit: async (values) => {
@@ -70,7 +83,7 @@ const SignUp = () => {
           variables: { ...values },
         });
         Auth.login(data.login.token);
-        navigate("/");
+        navigate('/');
       } catch (e) {
         console.log(e);
       }
@@ -139,7 +152,7 @@ const SignUp = () => {
                 ) : null}
               </div>
               <div className="form-group">
-                <label htmlFor="missionStatement">Your password</label>
+                <label htmlFor="missionStatement">Password</label>
                 <input
                   type="password"
                   className="form-control"
@@ -153,6 +166,24 @@ const SignUp = () => {
                   <span className="error-text">
                     <i className="fas fa-exclamation-circle"></i>
                     {formik.errors.password}
+                  </span>
+                ) : null}
+              </div>
+              <div className="form-group">
+                <label htmlFor="charityName">Confirm password</label>
+                <input
+                  type="password"
+                  className="form-control"
+                  name="confirmPassword"
+                  id="confirmPassword"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.confirmPassword}
+                />
+                {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
+                  <span className="error-text">
+                    <i className="fas fa-exclamation-circle"></i>
+                    {formik.errors.confirmPassword}
                   </span>
                 ) : null}
                 {showError && (
