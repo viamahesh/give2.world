@@ -11,7 +11,7 @@ import PrivateRoute from "./Components/Shared/PrivateRoute";
 
 import { AddCharity } from "./Components/Charity";
 import { Home } from "./Components/Home";
-import { Login, Signup } from "./Components/User";
+import { Login, SignUp } from "./Components/User";
 import UserProvider from "./providers";
 
 // Construct our main GraphQL API endpoint
@@ -49,7 +49,7 @@ const App = () => {
               <Route path="/charity/add" element={<AddCharity />} />
             </Route>
             <Route path="/user/login" element={<Login />}></Route>
-            <Route path="/user/sign-up" element={<Signup />}></Route>
+            <Route path="/user/sign-up" element={<SignUp />}></Route>
           </Routes>
         </Router>
       </UserProvider>

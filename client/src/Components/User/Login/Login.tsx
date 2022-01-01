@@ -61,7 +61,7 @@ const Login = () => {
         });
         setUserData(data.login);
         Auth.login(data.login.token);
-        navigate('/charity/add');
+        navigate('/');
       } catch (e) {
         console.log(e);
       }
