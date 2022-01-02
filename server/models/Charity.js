@@ -55,6 +55,10 @@ const charitySchema = new Schema({
   website: {
     type: String,
     trim: true
+  },
+  owner_ID: {
+    type: String,
+    required: true,
   }
 });
 

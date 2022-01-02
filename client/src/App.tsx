@@ -9,7 +9,7 @@ import { setContext } from "@apollo/client/link/context";
 
 import PrivateRoute from "./Components/Shared/PrivateRoute";
 
-import { AddCharity } from "./Components/Charity";
+import { AddCharity, CharityList } from "./Components/Charity";
 import { Home } from "./Components/Home";
 import { Login, SignUp } from "./Components/User";
 import UserProvider from "./providers";
@@ -48,6 +48,7 @@ const App = () => {
             <Route path="/charity/add" element={<PrivateRoute />}>
               <Route path="/charity/add" element={<AddCharity />} />
             </Route>
+            <Route path="/charity/list" element={<CharityList />} />
             <Route path="/user/login" element={<Login />}></Route>
             <Route path="/user/sign-up" element={<SignUp />}></Route>
           </Routes>

@@ -14,6 +14,7 @@ const typeDefs = gql`
     email: String
     phone: String
     website: String
+    owner_ID: String
   }
 
   input CharityInput {
@@ -29,6 +30,7 @@ const typeDefs = gql`
     email: String
     phone: String
     website: String
+    owner_ID: String
   }
 
   type User {
