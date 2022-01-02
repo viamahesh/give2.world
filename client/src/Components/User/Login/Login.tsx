@@ -124,7 +124,7 @@ const Login = () => {
               </button>
               <p className="new-account-message">
                 <i className="fas fa-hand-paper"></i>Don't have an account yet?
-                <Link to="/user/sign-up">Sign Up.</Link>
+                <Link to="/user/sign-up">Sign Up</Link>
               </p>
             </form>
           </div>

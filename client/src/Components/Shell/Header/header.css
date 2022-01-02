@@ -50,6 +50,9 @@ header {
   .logged-in-message i {
     margin-right: 10px;
   }
+  .logged-in-message a {
+    color: #42bfd8;
+  }
   .logout {
     background: #3ebcd3;
     border: none;
