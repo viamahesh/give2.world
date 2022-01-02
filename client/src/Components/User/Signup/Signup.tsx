@@ -26,6 +26,7 @@ interface FormErrors {
 const SignUp = () => {
   const { doSignUp, error } = signUp();
   const [showError, setShowError] = useState(false);
+  const [customErrorMessage, setCustomErrorMessage] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -87,8 +88,8 @@ const SignUp = () => {
         });
         Auth.login(data.login.token);
         navigate('/');
-      } catch (e) {
-        console.log(e);
+      } catch (e: any) {
+        if (e.message.includes('There was a duplicate key error')) setCustomErrorMessage(`An account with email address ${formik.values.email} already exists, Please login using this email address`);
       }
     },
   });
@@ -192,7 +193,7 @@ const SignUp = () => {
                 {showError && (
                   <span className="error-text">
                     <i className="fas fa-exclamation-circle"></i>
-                    Sign Up failed. Please try again
+                    {customErrorMessage ? customErrorMessage : `Sign Up failed. Please try again`}
                   </span>
                 )}
               </div>

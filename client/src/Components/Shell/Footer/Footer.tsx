@@ -23,6 +23,11 @@ const Footer: React.FC = () => {
             </Link>
           </li>
           <li>
+            <Link to="/user/sign-up">
+              <i className="fas fa-user-plus"></i>Sign Up
+            </Link>
+          </li>
+          <li>
             <Link to="/contact">
               <i className="fas fa-address-card"></i>Contact
             </Link>

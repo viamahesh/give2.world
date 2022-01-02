@@ -7,12 +7,10 @@ const userSchema = new Schema({
   firstName: {
     type: String,
     required: true,
-    unique: true,
   },  
   lastName: {
     type: String,
     required: true,
-    unique: true,
   },
   email: {
     type: String,
@@ -24,6 +22,14 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+});
+
+userSchema.post('save', function(error, doc, next) {
+  if (error.name === 'MongoError' && error.code === 11000) {
+    next(new Error('There was a duplicate key error'));
+  } else {
+    next();
+  }
 });
 
 userSchema.pre('save', async function(next) {

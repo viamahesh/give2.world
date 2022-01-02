@@ -121,6 +121,7 @@ select::-ms-expand {
   color: #B00020;
   display: block;
   font-size: 12px;
+  line-height: 18px;
   margin-top: 10px;
   width: 100%;
 }
