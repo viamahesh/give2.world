@@ -24,7 +24,7 @@ const Header: React.FC = () => {
       </Link>
       <span className="logged-in-message">
         <i className="fas fa-user"></i>Welcome,{" "}
-        <em>{userData ? <>{userData.user.username}<span className="logout">Logout</span></> : "Log in"}</em>
+        <em>{userData ? <>{userData.user.firstName}<span className="logout">Logout</span></> : "Log in"}</em>
       </span>
     </header>
   );

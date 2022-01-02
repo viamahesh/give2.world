@@ -33,7 +33,8 @@ const typeDefs = gql`
 
   type User {
     _id: ID!
-    username: String!
+    firstName: String!
+    lastName: String!
     email: String
   }
 
@@ -49,7 +50,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    signUp(username: String!, email: String!, password: String!): Auth
+    signUp(firstName: String!, lastName: String!, email: String!, password: String!): Auth
     addCharity(charityData: CharityInput!): Charity
     login(email: String!, password: String!): Auth
   }

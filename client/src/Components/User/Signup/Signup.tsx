@@ -12,7 +12,7 @@ interface FormValues {
   lastName: string;
   email: string;
   password: string;
-  confirmPassword: string;
+  confirmPassword?: string;
 }
 
 interface FormErrors {
@@ -60,9 +60,11 @@ const SignUp = () => {
     } else if (!passwordRegex.test(values.password)) {
       errors.password = 'Invalid password. Must contain one number';
     }
-    if (values.password && values.confirmPassword) {
+    if (!values.confirmPassword) {
+      errors.confirmPassword = 'Confirm password is required';
+    } else if (values.password && values.confirmPassword) {
       if (values.password !== values.confirmPassword) {
-        errors.confirmPassword = "Password not matched";
+        errors.confirmPassword = "Passwords does not match";
       }
     }
     return errors;
@@ -77,8 +79,9 @@ const SignUp = () => {
       confirmPassword: '',
     },
     validate,
-    onSubmit: async (values) => {
+    onSubmit: async (values: FormValues) => {
       try {
+        if (values.confirmPassword) delete values.confirmPassword;
         const { data } = await doSignUp({
           variables: { ...values },
         });
