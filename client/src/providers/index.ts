@@ -1,1 +1,2 @@
-export { UserContext, default } from './UserContext';
+export { UserContext, default as UserProvider } from './UserContext';
+export { CharityContext, default as CharityProvider } from './CharityContext';
