@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 import './table.css';
 
@@ -11,9 +11,10 @@ interface CharityItemInterface {
   phone: string;
 }
 
-const Table = ({ data }: { data: any }) => {
+const Table = ({ data }: { data: CharityItemInterface[] }) => {
+  console.log(data);
   return (
-    <table className="data-table">
+    <table className="data-table charity-list">
       <thead>
         <tr>
           <th>Charity Name</th>
@@ -22,11 +23,11 @@ const Table = ({ data }: { data: any }) => {
           <th>Contact Person</th>
           <th>Email</th>
           <th>Phone</th>
-          <th>Actions</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
-        {data.map((item: any) => {
+        {data.map((item: CharityItemInterface) => {
           return (
             <tr key={item.email}>
               <td>{item.charityName}</td>

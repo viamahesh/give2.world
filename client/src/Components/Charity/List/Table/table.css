@@ -1,25 +1,13 @@
-.data-table {
-  border-collapse: collapse;
-  font-family: 'Work Sans', sans-serif;
-  font-size: 12px;
-  width: 100%;
+.charity-list th:nth-child(1),
+.charity-list th:nth-child(4),
+.charity-list th:nth-child(6),
+.charity-list th:nth-child(7) {
+  width: 15%;
 }
-.data-table thead tr th {
-  background: #3ebcd3;
-  color: #faf0e4;
+.charity-list th:nth-child(2),
+.charity-list th:nth-child(3) {
+  width: 10%;
 }
-.data-table tbody tr td,
-.data-table thead tr th {
-  border: 1px solid #dddddd;
-  padding: 15px;
-  text-align: left;
-}
-.data-table tbody tr:last-of-type {
-  border-bottom: 2px solid #f2797a;
-}
-.data-table tbody tr:nth-child(even) {
-  background: #f2f2f2
-}
-.data-table tbody tr:nth-child(odd) {
-  background: #ffffff;
+.charity-list th:nth-child(5) {
+  width: 20%;
 }

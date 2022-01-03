@@ -24,8 +24,33 @@ const Header: React.FC = () => {
       </Link>
       <span className="logged-in-message">
         <i className="fas fa-user"></i>Welcome,{" "}
-        <em>{userData ? <>{userData.user.firstName}<span className="logout">Logout</span></> : <Link to="/user/login">Log in</Link>}</em>
+        <em>
+          {userData ? (
+            <>
+              {userData.user.firstName}
+              <span className="logout">Logout</span>
+            </>
+          ) : (
+            <Link to="/user/login">Log in</Link>
+          )}
+        </em>
       </span>
+      <nav>
+        <ul className="breadcrumb">
+          <li>
+            <i className="fas fa-house-user"></i>
+            <Link to="/charity/list">
+              <span>
+                Dashboard
+              </span>
+            </Link>
+          </li>
+          {/* <li>
+            <i className="fas fa-caret-right"></i>
+            <span>Request Donations</span>
+          </li> */}
+        </ul>
+      </nav>
     </header>
   );
 };
