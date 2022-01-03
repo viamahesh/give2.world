@@ -3,7 +3,7 @@ import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 
 import { Footer, Header } from '../../Shell';
-import { signUp } from '../../../hooks';
+import { signUpMutation } from '../../../hooks';
 
 import Auth from '../../../services/auth';
 
@@ -24,7 +24,7 @@ interface FormErrors {
 }
 
 const SignUp = () => {
-  const { doSignUp, error } = signUp();
+  const { doSignUp, error } = signUpMutation();
   const [showError, setShowError] = useState(false);
   const [customErrorMessage, setCustomErrorMessage] = useState('');
   const navigate = useNavigate();

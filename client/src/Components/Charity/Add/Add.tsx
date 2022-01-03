@@ -3,7 +3,7 @@ import { useFormik } from 'formik';
 import MaskedInput from 'react-text-mask';
 
 import { Header, Footer } from '../../Shell';
-import { addCharity } from '../../../hooks';
+import { addCharityMutation } from '../../../hooks';
 
 import { UserContext } from '../../../providers';
 
@@ -38,7 +38,7 @@ interface FormErrors {
 
 const AddCharity: React.FC = () => {
   const { userData } = useContext(UserContext);
-  const { doAddCharity, error } = addCharity();
+  const { doAddCharity, error } = addCharityMutation();
   const [showError, setShowError] = useState(false);
   const phoneNumberMask = [
     '(',

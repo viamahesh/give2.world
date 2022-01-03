@@ -1,4 +1,4 @@
-export { default as login } from './useLoginMutation';
-export { default as signUp } from './useSignUpMutation';
-export { default as addCharity } from './useAddCharityMutation';
-export { default as charityList } from './useCharityListQuery';
+export { default as loginMutation } from './useLoginMutation';
+export { default as signUpMutation } from './useSignUpMutation';
+export { default as addCharityMutation } from './useAddCharityMutation';
+export { default as charityListQuery } from './useCharityListQuery';

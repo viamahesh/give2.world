@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import './table.css';
 
@@ -39,13 +40,19 @@ const Table = ({ data }: { data: CharityItemInterface[] }) => {
               <td>
                 <ul className="action-menu">
                   <li>
-                    <i className="fas fa-pen-square"></i>Edit
+                    <Link to="/charity/add">
+                      <i className="fas fa-pen-square"></i>Edit
+                    </Link>
                   </li>
                   <li>
-                    <i className="fas fa-trash-alt"></i>Delete
+                    <Link to="/charity/add">
+                      <i className="fas fa-trash-alt"></i>Delete
+                    </Link>
                   </li>
                   <li>
-                    <i className="fas fa-hand-paper"></i>Request Stuff
+                    <Link to="/charity/add">
+                      <i className="fas fa-hand-paper"></i>Request Stuff
+                    </Link>
                   </li>
                 </ul>
               </td>

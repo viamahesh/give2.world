@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 
 import { Header, Footer } from '../../Shell';
 import Table from './Table/Table';
-import { charityList } from '../../../hooks';
+import { charityListQuery } from '../../../hooks';
 import { CharityProvider } from '../../../providers';
 
 import './list.css';
 
 const CharityList = () => {
-  const { loading, error, data, refetch } = charityList();
+  const { loading, error, data, refetch } = charityListQuery();
   const [showError, setShowError] = useState(false);
 
   useEffect(() => {

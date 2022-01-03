@@ -78,6 +78,7 @@ ul.breadcrumb li {
 }
 ul.breadcrumb li a {
   color: #42bfd8;
+  font-weight: 600;
 }
 ul.breadcrumb li i {
   margin-right: 10px;

@@ -187,5 +187,8 @@ select::-ms-expand {
   padding: 3px 0;
 }
 .action-menu li a {
-  color: #42bfd8;
+  color: #c88170;
+}
+.action-menu li a i {
+  margin-right: 10px;
 }

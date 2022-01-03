@@ -3,7 +3,7 @@ import { useFormik } from 'formik';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { Header, Footer } from '../../Shell';
-import { login } from '../../../hooks';
+import { loginMutation } from '../../../hooks';
 
 import Auth from '../../../services/auth';
 import { UserContext } from '../../../providers';
@@ -21,7 +21,7 @@ interface FormErrors {
 }
 
 const Login = () => {
-  const { doLogin, error } = login();
+  const { doLogin, error } = loginMutation()();
   const [showError, setShowError] = useState(false);
   const { setUserData } = useContext(UserContext);
   const navigate = useNavigate();
