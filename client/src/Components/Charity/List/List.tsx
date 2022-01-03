@@ -1,53 +1,46 @@
-import React from "react";
+import React, { useEffect, useState } from 'react';
 
-import { Header, Footer } from "../../Shell";
-import { charityList } from "../../../hooks";
-// import ListItem from './Item/Item';
-// import { CharityProvider } from "../../../providers";
+import { Header, Footer } from '../../Shell';
+import Table from './Table/Table';
+import { charityList } from '../../../hooks';
+import { CharityProvider } from '../../../providers';
 
-import "./list.css";
+import './list.css';
 
 const CharityList = () => {
-  const { loading, error, data, refetch } = charityList();
-  console.log(loading);
-  console.log(error);
-  console.log(data);
-  // const onRefetch = () => {
-  //   refetch();
-  // };
+  const { error, data, refetch } = charityList();
+  const [showError, setShowError] = useState(false);
 
-  // if (loading) return "Loading...";
-  // if (error) return `Error! ${error.message}`;
+  useEffect(() => {
+    if (error) {
+      setShowError(true);
+    } else {
+      setShowError(false);
+    }
+  }, [error]);
+
+  const onRefetch = () => {
+    refetch();
+  };
 
   return (
-  
     <div className="framesheet">
       <div className="wrapper">
         <Header />
         <div className="page-container">
-          <table className="data-table">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Points</th>
-              </tr>
-            </thead>
-            <tbody>
-              {/* <CharityProvider value={() => onRefetch()}>
-                
-             {data.allPets.map((item: any) => {
-                
-                  <ListItem row={item} />
-
-              })}
-              </CharityProvider> */}
-            </tbody>
-          </table>
+          <CharityProvider value={() => onRefetch()}>
+            <Table data={data.charities} />
+          </CharityProvider>
+          {showError && (
+            <span className="error-text">
+              <i className="fas fa-exclamation-circle"></i>
+              Operation failed. Please try again
+            </span>
+          )}
         </div>
       </div>
       <Footer />
     </div>
-    
   );
 };
 

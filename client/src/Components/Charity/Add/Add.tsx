@@ -393,6 +393,12 @@ const AddCharity: React.FC = () => {
                   onBlur={formik.handleBlur}
                   value={formik.values.website}
                 />
+                {showError && (
+                  <span className="error-text">
+                    <i className="fas fa-exclamation-circle"></i>
+                    Operation failed. Please try again
+                  </span>
+                )}
               </div>
               <button type="submit" className="form-button">
                 Add
