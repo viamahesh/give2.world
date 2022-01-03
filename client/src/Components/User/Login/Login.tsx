@@ -21,7 +21,7 @@ interface FormErrors {
 }
 
 const Login = () => {
-  const { doLogin, error } = loginMutation()();
+  const { doLogin, error } = loginMutation();
   const [showError, setShowError] = useState(false);
   const { setUserData } = useContext(UserContext);
   const navigate = useNavigate();
