@@ -36,7 +36,13 @@ const Table = ({ data }: { data: CharityItemInterface[] }) => {
               <td>{item.contactPerson}</td>
               <td>{item.email}</td>
               <td>{item.phone}</td>
-              <td>actions</td>
+              <td>
+                <ul className="action-menu">
+                  <li>Edit</li>
+                  <li>Delete</li>
+                  <li>Request Stuff</li>
+                </ul>
+              </td>
             </tr>
           )
         })}

@@ -50,17 +50,17 @@ span.donate-now-button a:after {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 5px solid #3ebcd3;
+  border: 5px solid #42bfd8;
   box-sizing: border-box;
   border-radius: 5px;
 }
 span.donate-now-button a:before {
   color: #fff;
-  background: #3ebcd3;
+  background: #42bfd8;
   transform: rotateY(0deg) translateZ(25px);
 }
 span.donate-now-button a:after {
-  color: #3ebcd3;
+  color: #42bfd8;
   transform: rotateX(90deg) translateZ(25px);
 }
 span.donate-now-button a:hover {
