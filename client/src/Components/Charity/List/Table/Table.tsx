@@ -38,13 +38,19 @@ const Table = ({ data }: { data: CharityItemInterface[] }) => {
               <td>{item.phone}</td>
               <td>
                 <ul className="action-menu">
-                  <li>Edit</li>
-                  <li>Delete</li>
-                  <li>Request Stuff</li>
+                  <li>
+                    <i className="fas fa-pen-square"></i>Edit
+                  </li>
+                  <li>
+                    <i className="fas fa-trash-alt"></i>Delete
+                  </li>
+                  <li>
+                    <i className="fas fa-hand-paper"></i>Request Stuff
+                  </li>
                 </ul>
               </td>
             </tr>
-          )
+          );
         })}
       </tbody>
     </table>
