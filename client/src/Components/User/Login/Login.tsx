@@ -1,14 +1,14 @@
-import React, { useEffect, useState, useContext } from "react";
-import { useFormik } from "formik";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useState, useContext } from 'react';
+import { useFormik } from 'formik';
+import { Link, useNavigate } from 'react-router-dom';
 
-import { Header, Footer } from "../../Shell";
-import { login } from "../../../hooks";
+import { Header, Footer } from '../../Shell';
+import { login } from '../../../hooks';
 
-import Auth from "../../../services/auth";
-import { UserContext } from "../../../providers";
+import Auth from '../../../services/auth';
+import { UserContext } from '../../../providers';
 
-import "./login.css";
+import './login.css';
 
 interface FormValues {
   email: string;
@@ -38,22 +38,22 @@ const Login = () => {
     setShowError(false);
     const errors: FormErrors = {};
     if (!values.email) {
-      errors.email = "Email is required";
+      errors.email = 'Email is required';
     } else if (
       !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
     ) {
-      errors.email = "Invalid email address";
+      errors.email = 'Invalid email address';
     }
     if (!values.password) {
-      errors.password = "Password is required";
+      errors.password = 'Password is required';
     }
     return errors;
   };
 
   const formik = useFormik({
     initialValues: {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
     },
     validate,
     onSubmit: async (values) => {
@@ -63,7 +63,7 @@ const Login = () => {
         });
         setUserData(data.login);
         Auth.login(data.login.token);
-        navigate("/");
+        navigate('/charity/list');
       } catch (e) {
         console.log(e);
       }

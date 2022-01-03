@@ -8,7 +8,7 @@ import { CharityProvider } from '../../../providers';
 import './list.css';
 
 const CharityList = () => {
-  const { error, data, refetch } = charityList();
+  const { loading, error, data, refetch } = charityList();
   const [showError, setShowError] = useState(false);
 
   useEffect(() => {
@@ -22,6 +22,8 @@ const CharityList = () => {
   const onRefetch = () => {
     refetch();
   };
+
+  if (loading) return <span className='loading-ani'></span>;
 
   return (
     <div className="framesheet">

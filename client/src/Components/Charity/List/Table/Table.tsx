@@ -12,7 +12,6 @@ interface CharityItemInterface {
 }
 
 const Table = ({ data }: { data: any }) => {
-  console.log(data);
   return (
     <table className="data-table">
       <thead>
