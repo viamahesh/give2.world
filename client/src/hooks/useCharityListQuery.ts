@@ -1,21 +1,26 @@
 import { gql, useQuery } from '@apollo/client';
 
 export const QUERY_CHARITIES = gql`
-  query charities {
-    charities {
+  query charities ($owner_ID: String) {
+    charities (owner_ID: $owner_ID) {
+      _id
       charityName
       city
       state
       contactPerson
       email
       phone
+      owner_ID
     }
   }
 `;
 
-const useCharityListQuery = () => {
+const useCharityListQuery = (owner_ID : any) => {
   return useQuery(QUERY_CHARITIES, {
-    fetchPolicy: "network-only"
+    fetchPolicy: "network-only",
+    variables: {
+      owner_ID: owner_ID,
+    },
   });
 };
 

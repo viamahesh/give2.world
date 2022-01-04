@@ -5,14 +5,14 @@ const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
 const resolvers = {
   Query: {
-    charities: async (parent, { name }) => {
-      const params = {};
-
-      if (name) {
-        params.name = {
-          $regex: name
+    charities: async (parent, { owner_ID }) => {
+      let params = {};
+      if (owner_ID) {
+        params = {
+          owner_ID
         };
       }
+      console.log(params);
       return await Charity.find(params);
     },
     charity: async (parent, { _id }) => {

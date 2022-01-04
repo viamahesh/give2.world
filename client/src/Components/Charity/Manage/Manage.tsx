@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { useFormik } from 'formik';
 import MaskedInput from 'react-text-mask';
 
@@ -7,7 +8,7 @@ import { addCharityMutation } from '../../../hooks';
 
 import { UserContext } from '../../../providers';
 
-import './add.css';
+import './manage.css';
 
 interface FormValues {
   charityName: string;
@@ -36,7 +37,9 @@ interface FormErrors {
   phone?: string;
 }
 
-const AddCharity: React.FC = () => {
+const ManageCharity: React.FC = () => {
+  const params = useParams();
+  console.log(params);
   const { userData } = useContext(UserContext);
   const { doAddCharity, error } = addCharityMutation();
   const [showError, setShowError] = useState(false);
@@ -427,4 +430,4 @@ const AddCharity: React.FC = () => {
   );
 };
 
-export default AddCharity;
+export default ManageCharity;

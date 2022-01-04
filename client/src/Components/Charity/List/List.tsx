@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+
+import { UserContext } from "../../../providers";
 
 import { Header, Footer } from '../../Shell';
 import Table from './Table/Table';
@@ -8,7 +10,8 @@ import { CharityProvider } from '../../../providers';
 import './list.css';
 
 const CharityList = () => {
-  const { loading, error, data, refetch } = charityListQuery();
+  const { userData } = useContext(UserContext);
+  const { loading, error, data, refetch } = charityListQuery(userData?.user._id);
   const [showError, setShowError] = useState(false);
 
   useEffect(() => {

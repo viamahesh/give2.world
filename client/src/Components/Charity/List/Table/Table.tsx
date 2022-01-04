@@ -40,7 +40,7 @@ const Table = ({ data }: { data: CharityItemInterface[] }) => {
               <td>
                 <ul className="action-menu">
                   <li>
-                    <Link to="/charity/add">
+                    <Link to="/charity/manage/123">
                       <i className="fas fa-pen-square"></i>Edit
                     </Link>
                   </li>
