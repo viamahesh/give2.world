@@ -1,9 +1,11 @@
 import React from 'react';
+import { confirmAlert } from 'react-confirm-alert';
 import { Link } from 'react-router-dom';
 
 import './table.css';
 
 interface CharityItemInterface {
+  _id: string;
   charityName: string;
   city: string;
   state: string;
@@ -13,7 +15,32 @@ interface CharityItemInterface {
 }
 
 const Table = ({ data }: { data: CharityItemInterface[] }) => {
-  console.log(data);
+
+
+
+  const onHandleDelete = (id: string) => {
+    confirmAlert({
+      customUI: ({ onClose }) => {
+        return (
+          <div className='custom-ui'>
+            <h1>Confirm the action</h1>
+            <p>Do you really want to delete this Charity and all it's data?</p>
+            <button className="no-button" onClick={onClose}>No</button>
+            <button
+              onClick={() => {
+                console.log(123);
+                onClose();
+              }}
+              className="yes-button"
+            >
+              Yes, Delete it!
+            </button>
+          </div>
+        );
+      }
+    });
+  }
+
   return (
     <table className="data-table charity-list">
       <thead>
@@ -30,7 +57,7 @@ const Table = ({ data }: { data: CharityItemInterface[] }) => {
       <tbody>
         {data.map((item: CharityItemInterface) => {
           return (
-            <tr key={item.email}>
+            <tr key={item._id}>
               <td>{item.charityName}</td>
               <td>{item.city}</td>
               <td>{item.state}</td>
@@ -40,14 +67,14 @@ const Table = ({ data }: { data: CharityItemInterface[] }) => {
               <td>
                 <ul className="action-menu">
                   <li>
-                    <Link to="/charity/manage/123">
+                    <Link to={'/charity/manage/' + item._id}>
                       <i className="fas fa-pen-square"></i>Edit
                     </Link>
                   </li>
                   <li>
-                    <Link to="/charity/add">
+                    <a href="#" onClick={() => onHandleDelete(item._id)}>
                       <i className="fas fa-trash-alt"></i>Delete
-                    </Link>
+                    </a>
                   </li>
                   <li>
                     <Link to="/charity/add">
