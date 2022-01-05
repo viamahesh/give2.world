@@ -15,7 +15,7 @@ export const QUERY_CHARITIES = gql`
   }
 `;
 
-const useCharityListQuery = (owner_ID : any) => {
+const useCharityListQuery = (owner_ID : string | undefined) => {
   return useQuery(QUERY_CHARITIES, {
     fetchPolicy: "network-only",
     variables: {
