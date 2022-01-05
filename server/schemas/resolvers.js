@@ -12,7 +12,6 @@ const resolvers = {
           owner_ID
         };
       }
-      console.log(params);
       return await Charity.find(params);
     },
     charity: async (parent, { _id }) => {
@@ -23,7 +22,6 @@ const resolvers = {
         const user = await User.findById(context.user._id);
         return user;
       }
-
       throw new AuthenticationError('Not logged in');
     }
   },
@@ -33,10 +31,6 @@ const resolvers = {
       const token = signToken(user);
 
       return { token, user };
-    },
-    addCharity: async (_, args) => {
-      const res = await Charity.create(args.charityData);
-      return res;
     },
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
@@ -49,7 +43,23 @@ const resolvers = {
       }
       const token = signToken(user);
       return { token, user };
-    }
+    },
+    addCharity: async (_, args) => {
+      const res = await Charity.create(args.charityData);
+      return res;
+    },
+    deleteCharity: async (_, { _id }) => {
+      let params = {};
+      if (_id) {
+        params = {
+          _id
+        };
+      } else {
+        throw new AuthenticationError('Missing ID for an delete operation');
+      }
+      const res = await Charity.findByIdAndDelete(params);
+      return res;
+    },
   }
 };
 

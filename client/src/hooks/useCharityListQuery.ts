@@ -19,7 +19,7 @@ const useCharityListQuery = (owner_ID : string | undefined) => {
   return useQuery(QUERY_CHARITIES, {
     fetchPolicy: "network-only",
     variables: {
-      owner_ID: owner_ID,
+      owner_ID,
     },
   });
 };

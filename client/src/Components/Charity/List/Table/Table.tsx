@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { confirmAlert } from 'react-confirm-alert';
 import { Link } from 'react-router-dom';
+
+import { deleteCharityMutation } from '../../../../hooks';
 
 import './table.css';
 
@@ -15,8 +17,16 @@ interface CharityItemInterface {
 }
 
 const Table = ({ data }: { data: CharityItemInterface[] }) => {
-
-
+  const { doDeleteCharity, error } = deleteCharityMutation();
+  const [showError, setShowError] = useState(false);
+  
+  useEffect(() => {
+    if (error) {
+      setShowError(true);
+    } else {
+      setShowError(false);
+    }
+  }, [error]);
 
   const onHandleDelete = (id: string) => {
     confirmAlert({
@@ -27,8 +37,13 @@ const Table = ({ data }: { data: CharityItemInterface[] }) => {
             <p>Do you really want to delete this Charity and all it's data?</p>
             <button className="no-button" onClick={onClose}>No</button>
             <button
-              onClick={() => {
-                console.log(123);
+              onClick={async () => {
+                let values = {
+                  id
+                }
+                const { data } = await doDeleteCharity({
+                  variables: { ...values },
+                });
                 onClose();
               }}
               className="yes-button"
@@ -72,9 +87,9 @@ const Table = ({ data }: { data: CharityItemInterface[] }) => {
                     </Link>
                   </li>
                   <li>
-                    <a href="#" onClick={() => onHandleDelete(item._id)}>
+                    <button onClick={() => onHandleDelete(item._id)}>
                       <i className="fas fa-trash-alt"></i>Delete
-                    </a>
+                    </button>
                   </li>
                   <li>
                     <Link to="/charity/add">
@@ -82,6 +97,12 @@ const Table = ({ data }: { data: CharityItemInterface[] }) => {
                     </Link>
                   </li>
                 </ul>
+                {showError && (
+                  <span className="error-text">
+                    <i className="fas fa-exclamation-circle"></i>
+                    Operation failed. Please try again
+                  </span>
+                )}
               </td>
             </tr>
           );
