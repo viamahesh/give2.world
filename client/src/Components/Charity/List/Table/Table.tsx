@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { confirmAlert } from 'react-confirm-alert';
 import { Link } from 'react-router-dom';
 
+import { CharityContext } from "../../../../providers";
 import { deleteCharityMutation } from '../../../../hooks';
 
 import './table.css';
@@ -16,7 +17,9 @@ interface CharityItemInterface {
   phone: string;
 }
 
-const Table = ({ data }: { data: CharityItemInterface[] }) => {
+const Table = ({ data, userId }: { data: CharityItemInterface[], userId: string | null }) => {
+  const refetch = useContext(CharityContext);
+  console.log(refetch);
   const { doDeleteCharity, error } = deleteCharityMutation();
   const [showError, setShowError] = useState(false);
   
@@ -32,7 +35,7 @@ const Table = ({ data }: { data: CharityItemInterface[] }) => {
     confirmAlert({
       customUI: ({ onClose }) => {
         return (
-          <div className='custom-ui'>
+          <div className="custom-ui">
             <h1>Confirm the action</h1>
             <p>Do you really want to delete this Charity and all it's data?</p>
             <button className="no-button" onClick={onClose}>No</button>
@@ -41,7 +44,7 @@ const Table = ({ data }: { data: CharityItemInterface[] }) => {
                 let values = {
                   id
                 }
-                const { data } = await doDeleteCharity({
+                await doDeleteCharity({
                   variables: { ...values },
                 });
                 onClose();

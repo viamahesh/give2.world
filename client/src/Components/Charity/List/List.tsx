@@ -11,6 +11,10 @@ import './list.css';
 
 const CharityList = () => {
   const { userData } = useContext(UserContext);
+  let userId = null;
+  if(userData !== null) {
+    userId = userData.user._id
+  }
   const { loading, error, data, refetch } = charityListQuery(userData?.user._id);
   const [showError, setShowError] = useState(false);
 
@@ -34,7 +38,7 @@ const CharityList = () => {
         <Header />
         <div className="page-container">
           <CharityProvider value={() => onRefetch()}>
-            <Table data={data.charities} />
+            <Table data={data.charities} userId={userId} />
           </CharityProvider>
           {showError && (
             <span className="error-text">
