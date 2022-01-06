@@ -6,6 +6,7 @@ import { CharityContext } from "../../../../providers";
 import { deleteCharityMutation } from '../../../../hooks';
 
 import './table.css';
+import { gql, useMutation } from '@apollo/client';
 
 interface CharityItemInterface {
   _id: string;
@@ -17,19 +18,43 @@ interface CharityItemInterface {
   phone: string;
 }
 
-const Table = ({ data, userId }: { data: CharityItemInterface[], userId: string | null }) => {
-  const refetch = useContext(CharityContext);
-  console.log(refetch);
-  const { doDeleteCharity, error } = deleteCharityMutation();
-  const [showError, setShowError] = useState(false);
-  
-  useEffect(() => {
-    if (error) {
-      setShowError(true);
-    } else {
-      setShowError(false);
+export const DELETE_CHARITY = gql`
+mutation deleteCharity($id: ID!) {
+  deleteCharity(_id: $id) {
+    charityName,
+    phone
+  }
+}
+`;
+
+export const QUERY_CHARITIES = gql`
+  query charities ($owner_ID: String) {
+    charities (owner_ID: $owner_ID) {
+      _id
+      charityName
+      city
+      state
+      contactPerson
+      email
+      phone
+      owner_ID
     }
-  }, [error]);
+  }
+`;
+
+const Table = ({ data, userId }: { data: CharityItemInterface[], userId: string | null }) => {
+  const refetch = useContext(CharityContext) as any;
+  console.log(refetch);
+  const doDeleteCharity = deleteCharityMutation();
+  // const [showError, setShowError] = useState(false);
+  
+  // useEffect(() => {
+  //   if (error) {
+  //     setShowError(true);
+  //   } else {
+  //     setShowError(false);
+  //   }
+  // }, [error]);
 
   const onHandleDelete = (id: string) => {
     confirmAlert({
@@ -40,13 +65,26 @@ const Table = ({ data, userId }: { data: CharityItemInterface[], userId: string 
             <p>Do you really want to delete this Charity and all it's data?</p>
             <button className="no-button" onClick={onClose}>No</button>
             <button
-              onClick={async () => {
+              onClick={() => {
                 let values = {
                   id
                 }
-                await doDeleteCharity({
-                  variables: { ...values },
-                });
+              
+                doDeleteCharity({
+                  variables: {
+                    ...values
+                  },
+                  refetchQueries: () => [{
+                    query: QUERY_CHARITIES,
+                    variables: {
+                      owner_ID: userId,
+                    },
+                  }]
+                })
+                .then((_) => {
+                  refetch();
+                })
+                .catch((e) => console.log(e));
                 onClose();
               }}
               className="yes-button"
@@ -100,12 +138,12 @@ const Table = ({ data, userId }: { data: CharityItemInterface[], userId: string 
                     </Link>
                   </li>
                 </ul>
-                {showError && (
+                {/* {showError && (
                   <span className="error-text">
                     <i className="fas fa-exclamation-circle"></i>
                     Operation failed. Please try again
                   </span>
-                )}
+                )} */}
               </td>
             </tr>
           );

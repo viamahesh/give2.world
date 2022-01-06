@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import gql from "graphql-tag";
 import { useMutation } from "@apollo/client";
 
 export const DELETE_CHARITY = gql`
@@ -11,11 +11,8 @@ mutation deleteCharity($id: ID!) {
 `;
 
 const useDeleteCharityMutation = () => {
-  const [doDeleteCharity, { error }]  = useMutation(DELETE_CHARITY);
-  return {
-    doDeleteCharity,
-    error
-  }
+  let [doDeleteCharity] = useMutation(DELETE_CHARITY);
+  return doDeleteCharity;
 }
 
 export default useDeleteCharityMutation;
