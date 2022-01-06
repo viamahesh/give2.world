@@ -1,12 +1,12 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { confirmAlert } from 'react-confirm-alert';
-import { Link } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from "react";
+import { gql } from "@apollo/client";
+import { confirmAlert } from "react-confirm-alert";
+import { Link } from "react-router-dom";
 
 import { CharityContext } from "../../../../providers";
-import { deleteCharityMutation } from '../../../../hooks';
+import { QUERY_CHARITIES, deleteCharityMutation } from "../../../../hooks";
 
-import './table.css';
-import { gql, useMutation } from '@apollo/client';
+import "./table.css";
 
 interface CharityItemInterface {
   _id: string;
@@ -18,43 +18,16 @@ interface CharityItemInterface {
   phone: string;
 }
 
-export const DELETE_CHARITY = gql`
-mutation deleteCharity($id: ID!) {
-  deleteCharity(_id: $id) {
-    charityName,
-    phone
-  }
-}
-`;
-
-export const QUERY_CHARITIES = gql`
-  query charities ($owner_ID: String) {
-    charities (owner_ID: $owner_ID) {
-      _id
-      charityName
-      city
-      state
-      contactPerson
-      email
-      phone
-      owner_ID
-    }
-  }
-`;
-
-const Table = ({ data, userId }: { data: CharityItemInterface[], userId: string | null }) => {
+const Table = ({
+  data,
+  userId,
+}: {
+  data: CharityItemInterface[];
+  userId: string | null;
+}) => {
   const refetch = useContext(CharityContext) as any;
-  console.log(refetch);
   const doDeleteCharity = deleteCharityMutation();
-  // const [showError, setShowError] = useState(false);
-  
-  // useEffect(() => {
-  //   if (error) {
-  //     setShowError(true);
-  //   } else {
-  //     setShowError(false);
-  //   }
-  // }, [error]);
+  const [showError, setShowError] = useState(false);
 
   const onHandleDelete = (id: string) => {
     confirmAlert({
@@ -63,28 +36,31 @@ const Table = ({ data, userId }: { data: CharityItemInterface[], userId: string 
           <div className="custom-ui">
             <h1>Confirm the action</h1>
             <p>Do you really want to delete this Charity and all it's data?</p>
-            <button className="no-button" onClick={onClose}>No</button>
+            <button className="no-button" onClick={onClose}>
+              No
+            </button>
             <button
               onClick={() => {
-                let values = {
-                  id
-                }
-              
                 doDeleteCharity({
                   variables: {
-                    ...values
+                    id,
                   },
-                  refetchQueries: () => [{
-                    query: QUERY_CHARITIES,
-                    variables: {
-                      owner_ID: userId,
+                  refetchQueries: () => [
+                    {
+                      query: QUERY_CHARITIES,
+                      variables: {
+                        owner_ID: userId,
+                      },
                     },
-                  }]
+                  ],
                 })
-                .then((_) => {
-                  refetch();
-                })
-                .catch((e) => console.log(e));
+                  .then((_) => {
+                    setShowError(false);
+                    refetch();
+                  })
+                  .catch((e) => {
+                    setShowError(true);
+                  });
                 onClose();
               }}
               className="yes-button"
@@ -93,9 +69,9 @@ const Table = ({ data, userId }: { data: CharityItemInterface[], userId: string 
             </button>
           </div>
         );
-      }
+      },
     });
-  }
+  };
 
   return (
     <table className="data-table charity-list">
@@ -123,14 +99,14 @@ const Table = ({ data, userId }: { data: CharityItemInterface[], userId: string 
               <td>
                 <ul className="action-menu">
                   <li>
-                    <Link to={'/charity/manage/' + item._id}>
+                    <Link to={"/charity/manage/" + item._id}>
                       <i className="fas fa-pen-square"></i>Edit
                     </Link>
                   </li>
                   <li>
-                    <button onClick={() => onHandleDelete(item._id)}>
+                    <a onClick={() => onHandleDelete(item._id)}>
                       <i className="fas fa-trash-alt"></i>Delete
-                    </button>
+                    </a>
                   </li>
                   <li>
                     <Link to="/charity/add">
@@ -138,17 +114,17 @@ const Table = ({ data, userId }: { data: CharityItemInterface[], userId: string 
                     </Link>
                   </li>
                 </ul>
-                {/* {showError && (
-                  <span className="error-text">
-                    <i className="fas fa-exclamation-circle"></i>
-                    Operation failed. Please try again
-                  </span>
-                )} */}
               </td>
             </tr>
           );
         })}
       </tbody>
+      {showError && (
+        <span className="error-text">
+          <i className="fas fa-exclamation-circle"></i>
+          Operation failed. Please try again
+        </span>
+      )}
     </table>
   );
 };

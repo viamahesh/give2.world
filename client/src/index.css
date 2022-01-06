@@ -188,6 +188,7 @@ select::-ms-expand {
 }
 .action-menu li a {
   color: #c88170;
+  cursor: pointer;
 }
 .action-menu li a i {
   margin-right: 10px;
