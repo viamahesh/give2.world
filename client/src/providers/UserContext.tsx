@@ -16,12 +16,12 @@ interface UserResponse {
 
 interface UserContextInterface {
   userData: UserResponse | null;
-  setUserData: (response: UserResponse) => void;
+  setUserData: (response: UserResponse | null) => void;
 }
 
 const userContextDefaultValues: UserContextInterface = {
   userData: null,
-  setUserData: (response: UserResponse) => {}
+  setUserData: (response: UserResponse | null) => {}
 };
 
 export const UserContext = createContext<UserContextInterface>(

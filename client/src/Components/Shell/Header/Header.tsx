@@ -2,11 +2,17 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import { UserContext } from '../../../providers';
+import AuthServise from '../../../services/auth';
 
 import './header.css';
 
 const Header: React.FC = () => {
-  const { userData } = useContext(UserContext);
+  const { userData, setUserData } = useContext(UserContext);
+
+  const logout = () => {
+    setUserData(null);
+    AuthServise.logout();
+  }
 
   return (
     <header>
@@ -24,7 +30,7 @@ const Header: React.FC = () => {
       </Link>
       <span className="logged-in-message">
         <i className="fas fa-user"></i>Welcome,{" "}
-        <em>
+        <em onClick={logout}>
           {userData ? (
             <>
               {userData.user.firstName}
