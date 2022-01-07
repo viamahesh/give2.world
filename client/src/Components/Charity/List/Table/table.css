@@ -1,3 +1,6 @@
+.charity-list-container {
+  width: 100%;
+}
 .charity-list th:nth-child(1),
 .charity-list th:nth-child(4),
 .charity-list th:nth-child(6),

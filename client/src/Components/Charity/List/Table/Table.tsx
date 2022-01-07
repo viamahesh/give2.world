@@ -44,7 +44,7 @@ const Table = ({
                 try {
                   await doDeleteCharity({
                     variables: {
-                      id
+                      id: 12
                     },
                     refetchQueries: () => [
                       {
@@ -59,7 +59,6 @@ const Table = ({
                   refetch();
                 } catch (error) {
                   setShowError(true);
-                  console.log(error);
                 }
                 onClose();
               }}
@@ -74,58 +73,60 @@ const Table = ({
   };
 
   return (
-    <table className="data-table charity-list">
-      <thead>
-        <tr>
-          <th>Charity Name</th>
-          <th>City</th>
-          <th>State</th>
-          <th>Contact Person</th>
-          <th>Email</th>
-          <th>Phone</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        {data.map((item: CharityItemInterface) => {
-          return (
-            <tr key={item._id}>
-              <td>{item.charityName}</td>
-              <td>{item.city}</td>
-              <td>{item.state}</td>
-              <td>{item.contactPerson}</td>
-              <td>{item.email}</td>
-              <td>{item.phone}</td>
-              <td>
-                <ul className="action-menu">
-                  <li>
-                    <Link to={"/charity/manage/" + item._id}>
-                      <i className="fas fa-pen-square"></i>Edit
-                    </Link>
-                  </li>
-                  <li>
-                    <a onClick={() => onHandleDelete(item._id)}>
-                      <i className="fas fa-trash-alt"></i>Delete
-                    </a>
-                  </li>
-                  <li>
-                    <Link to="/charity/add">
-                      <i className="fas fa-hand-paper"></i>Request Stuff
-                    </Link>
-                  </li>
-                </ul>
-              </td>
-            </tr>
-          );
-        })}
-      </tbody>
+    <div className="charity-list-container">
+      <table className="data-table charity-list">
+        <thead>
+          <tr>
+            <th>Charity Name</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Contact Person</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.map((item: CharityItemInterface) => {
+            return (
+              <tr key={item._id}>
+                <td>{item.charityName}</td>
+                <td>{item.city}</td>
+                <td>{item.state}</td>
+                <td>{item.contactPerson}</td>
+                <td>{item.email}</td>
+                <td>{item.phone}</td>
+                <td>
+                  <ul className="action-menu">
+                    <li>
+                      <Link to={"/charity/manage/" + item._id}>
+                        <i className="fas fa-pen-square"></i>Edit
+                      </Link>
+                    </li>
+                    <li>
+                      <a onClick={() => onHandleDelete(item._id)}>
+                        <i className="fas fa-trash-alt"></i>Delete
+                      </a>
+                    </li>
+                    <li>
+                      <Link to="/charity/add">
+                        <i className="fas fa-hand-paper"></i>Request Stuff
+                      </Link>
+                    </li>
+                  </ul>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
       {showError && (
-        <span className="error-text">
-          <i className="fas fa-exclamation-circle"></i>
-          Operation failed. Please try again
-        </span>
-      )}
-    </table>
+          <span className="error-text">
+            <i className="fas fa-exclamation-circle"></i>
+            Operation failed. Please try again
+          </span>
+        )}
+    </div>
   );
 };
 
