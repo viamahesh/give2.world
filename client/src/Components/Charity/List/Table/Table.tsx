@@ -40,27 +40,27 @@ const Table = ({
               No
             </button>
             <button
-              onClick={() => {
-                doDeleteCharity({
-                  variables: {
-                    id,
-                  },
-                  refetchQueries: () => [
-                    {
-                      query: QUERY_CHARITIES,
-                      variables: {
-                        owner_ID: userId,
-                      },
+              onClick={async () => {
+                try {
+                  await doDeleteCharity({
+                    variables: {
+                      id: '123'
                     },
-                  ],
-                })
-                  .then((_) => {
-                    setShowError(false);
-                    refetch();
-                  })
-                  .catch((e) => {
-                    setShowError(true);
+                    refetchQueries: () => [
+                      {
+                        query: QUERY_CHARITIES,
+                        variables: {
+                          owner_ID: userId,
+                        },
+                      },
+                    ],
                   });
+                  setShowError(false);
+                  refetch();
+                } catch (error) {
+                  setShowError(true);
+                  console.log(error);
+                }
                 onClose();
               }}
               className="yes-button"
