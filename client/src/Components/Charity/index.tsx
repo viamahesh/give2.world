@@ -1,2 +1,2 @@
-export { ManageCharity } from './Manage';
+export { AddCharity } from './Add';
 export { CharityList } from './List';

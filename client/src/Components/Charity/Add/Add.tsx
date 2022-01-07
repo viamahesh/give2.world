@@ -4,11 +4,11 @@ import { useFormik } from 'formik';
 import MaskedInput from 'react-text-mask';
 
 import { Header, Footer } from '../../Shell';
-import { addCharityMutation } from '../../../hooks';
+import { addCharityMutation, charityQuery } from '../../../hooks';
 
 import AuthService from '../../../services/auth';
 
-import './manage.css';
+import './add.css';
 
 interface FormValues {
   charityName: string;
@@ -37,11 +37,16 @@ interface FormErrors {
   phone?: string;
 }
 
-const ManageCharity: React.FC = () => {
+const AddCharity: React.FC = () => {
   const params = useParams();
   const user: any = AuthService.getProfile();
   const userId = user.data._id;
   const { doAddCharity, error } = addCharityMutation();
+  if(params.id) {
+    console.log(params.id);
+    const { loading, data } = charityQuery(params.id);
+    console.log(data);
+  }
   const [showError, setShowError] = useState(false);
   const phoneNumberMask = [
     '(',
@@ -136,7 +141,7 @@ const ManageCharity: React.FC = () => {
   return (
     <div className="framesheet">
       <div className="wrapper">
-        <Header breadcrumb={["Manage Charity"]} />
+        <Header breadcrumb={["Add Charity"]} />
         <div className="page-container">
           <div className="page-form">
             <form onSubmit={formik.handleSubmit}>
@@ -430,4 +435,4 @@ const ManageCharity: React.FC = () => {
   );
 };
 
-export default ManageCharity;
+export default AddCharity;

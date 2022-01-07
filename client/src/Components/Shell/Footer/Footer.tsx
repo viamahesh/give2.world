@@ -18,7 +18,7 @@ const Footer: React.FC = () => {
             </Link>
           </li>
           <li>
-            <Link to="/charity/manage">
+            <Link to="/charity/add">
               <i className="fas fa-thumbs-up"></i>Add Charity
             </Link>
           </li>
