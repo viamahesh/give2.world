@@ -332,3 +332,16 @@ body.react-confirm-alert-body-element {
 .yes-button {
   background: #b00020!important;
 }
+.no-data-text,
+.error-text {
+  color: #b00020;
+  display: block;
+  font-size: 12px;
+  line-height: 18px;
+  margin-top: 10px;
+  width: 100%;
+}
+.no-data-text i,
+.error-text i {
+  margin-right: 10px;
+}

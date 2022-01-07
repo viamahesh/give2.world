@@ -72,6 +72,10 @@ const Table = ({
     });
   };
 
+  if(data.length === 0) {
+    return (<div className="no-data-text"><i className="fas fa-hourglass-start"></i>No charities available, please add your charity to start the processk;;.</div>);
+  }
+
   return (
     <div className="charity-list-container">
       <table className="data-table charity-list">

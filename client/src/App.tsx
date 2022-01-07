@@ -7,7 +7,7 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
-import PrivateRoute from './Components/Shared/PrivateRoute';
+import { PrivateRoute, LoggedInRedirectRoute } from './Components/Shared';
 
 import { ManageCharity, CharityList } from './Components/Charity';
 import { Home } from './Components/Home';
@@ -44,16 +44,22 @@ const App = () => {
       <UserProvider>
         <Router>
           <Routes>
-            <Route path='/' element={<Home />}></Route>
-            <Route path='/charity/manage' element={<PrivateRoute />}>
-              <Route path='/charity/manage' element={<ManageCharity />} />
+            <Route path="/" element={<Home />}></Route>
+            <Route path="/charity/manage" element={<PrivateRoute />}>
+              <Route path="/charity/manage" element={<ManageCharity />} />
             </Route>
-            <Route path='/charity/manage/:id' element={<PrivateRoute />}>
-              <Route path='/charity/manage/:id' element={<ManageCharity />} />
+            <Route path="/charity/manage/:id" element={<PrivateRoute />}>
+              <Route path="/charity/manage/:id" element={<ManageCharity />} />
             </Route>
-            <Route path='/charity/list' element={<CharityList />}></Route>
-            <Route path='/user/login' element={<Login />}></Route>
-            <Route path='/user/sign-up' element={<SignUp />}></Route>
+            <Route path="/charity/list" element={<PrivateRoute />}>
+              <Route path="/charity/list" element={<CharityList />}></Route>
+            </Route>
+            <Route path="/user/login" element={<LoggedInRedirectRoute />}>
+              <Route path="/user/login" element={<Login />}></Route>
+            </Route>
+            <Route path="/user/sign-up" element={<LoggedInRedirectRoute />}>
+              <Route path="/user/sign-up" element={<SignUp />}></Route>
+            </Route>
           </Routes>
         </Router>
       </UserProvider>
