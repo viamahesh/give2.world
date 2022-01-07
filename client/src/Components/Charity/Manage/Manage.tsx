@@ -136,7 +136,7 @@ const ManageCharity: React.FC = () => {
   return (
     <div className="framesheet">
       <div className="wrapper">
-        <Header />
+        <Header breadcrumb={["Manage Charity"]} />
         <div className="page-container">
           <div className="page-form">
             <form onSubmit={formik.handleSubmit}>

@@ -6,9 +6,14 @@ import AuthService from '../../../services/auth';
 
 import './header.css';
 
-const Header: React.FC = () => {
+interface Props {
+  breadcrumb?: Array<string>;
+}
+
+const Header: React.FC<Props> = ({ breadcrumb }) => {
   const { userData, setUserData } = useContext(UserContext);
   const user: any = AuthService.getProfile();
+  const isLoggedIn = AuthService.loggedIn();
   let firstName;
   if (user) {
     firstName = user.data.firstName;
@@ -46,7 +51,7 @@ const Header: React.FC = () => {
           )}
         </em>
       </span>
-      <nav>
+      {isLoggedIn && <nav>
         <ul className="breadcrumb">
           <li>
             <i className="fas fa-house-user"></i>
@@ -56,12 +61,17 @@ const Header: React.FC = () => {
               </span>
             </Link>
           </li>
-          {/* <li>
-            <i className="fas fa-caret-right"></i>
-            <span>Request Donations</span>
-          </li> */}
+          {breadcrumb && breadcrumb.map((item: string) => {
+            return (
+              <li>
+                <i className="fas fa-caret-right"></i>
+                <span>{item}</span>
+              </li>
+            )
+            })
+          }
         </ul>
-      </nav>
+      </nav>}
     </header>
   );
 };
