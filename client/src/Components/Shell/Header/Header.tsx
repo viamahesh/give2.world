@@ -9,8 +9,11 @@ import './header.css';
 const Header: React.FC = () => {
   const { userData, setUserData } = useContext(UserContext);
   const user: any = AuthService.getProfile();
-  const firstName = user.data.firstName;
-
+  let firstName;
+  if (user) {
+    firstName = user.data.firstName;
+  }
+  
   const logout = () => {
     setUserData(null);
     AuthService.logout();
