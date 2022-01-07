@@ -44,7 +44,7 @@ const Table = ({
                 try {
                   await doDeleteCharity({
                     variables: {
-                      id: 12
+                      id
                     },
                     refetchQueries: () => [
                       {
