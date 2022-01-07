@@ -6,7 +6,7 @@ import MaskedInput from 'react-text-mask';
 import { Header, Footer } from '../../Shell';
 import { addCharityMutation } from '../../../hooks';
 
-import { UserContext } from '../../../providers';
+import AuthService from '../../../services/auth';
 
 import './manage.css';
 
@@ -39,8 +39,8 @@ interface FormErrors {
 
 const ManageCharity: React.FC = () => {
   const params = useParams();
-  console.log(params);
-  const { userData } = useContext(UserContext);
+  const user: any = AuthService.getProfile();
+  const userId = user.data._id;
   const { doAddCharity, error } = addCharityMutation();
   const [showError, setShowError] = useState(false);
   const phoneNumberMask = [
@@ -118,7 +118,7 @@ const ManageCharity: React.FC = () => {
       email: '',
       phone: '',
       website: '',
-      owner_ID: userData!.user._id
+      owner_ID: userId
     },
     validate,
     onSubmit: async (values) => {

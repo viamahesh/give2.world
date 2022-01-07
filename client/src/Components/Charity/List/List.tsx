@@ -1,21 +1,18 @@
 import React, { useContext, useEffect, useState } from 'react';
 
-import { UserContext } from '../../../providers';
-
 import { Header, Footer } from '../../Shell';
 import Table from './Table/Table';
 import { charityListQuery } from '../../../hooks';
 import { CharityProvider } from '../../../providers';
 
+import AuthService from '../../../services/auth';
+
 import './list.css';
 
 const CharityList = () => {
-  const { userData } = useContext(UserContext);
-  let userId = null;
-  if(userData !== null) {
-    userId = userData.user._id
-  }
-  const { loading, error, data, refetch } = charityListQuery(userData?.user._id);
+  const user: any = AuthService.getProfile();
+  const userId = user.data._id;
+  const { loading, error, data, refetch } = charityListQuery(userId);
   const [showError, setShowError] = useState(false);
 
   useEffect(() => {

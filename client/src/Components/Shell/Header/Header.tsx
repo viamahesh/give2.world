@@ -2,16 +2,18 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import { UserContext } from '../../../providers';
-import AuthServise from '../../../services/auth';
+import AuthService from '../../../services/auth';
 
 import './header.css';
 
 const Header: React.FC = () => {
   const { userData, setUserData } = useContext(UserContext);
+  const user: any = AuthService.getProfile();
+  const firstName = user.data.firstName;
 
   const logout = () => {
     setUserData(null);
-    AuthServise.logout();
+    AuthService.logout();
   }
 
   return (
@@ -31,9 +33,9 @@ const Header: React.FC = () => {
       <span className="logged-in-message">
         <i className="fas fa-user"></i>Welcome,{" "}
         <em onClick={logout}>
-          {userData ? (
+          {firstName ? (
             <>
-              {userData.user.firstName}
+              {firstName}
               <span className="logout">Logout</span>
             </>
           ) : (
