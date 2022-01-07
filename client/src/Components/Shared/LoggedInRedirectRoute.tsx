@@ -7,7 +7,7 @@ const LoggedInRedirectRoute = () => {
 
     // If authorized, return an outlet that will render child elements
     // If not, return element that will navigate to login page
-    return !isLoggedIn ? <Outlet /> : <Navigate to='/charity/manage' />;
+    return !isLoggedIn ? <Outlet /> : <Navigate to='/charity/list' />;
 }
 
 export default LoggedInRedirectRoute;

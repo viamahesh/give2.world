@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 
-import { UserContext } from "../../../providers";
+import { UserContext } from '../../../providers';
 
 import { Header, Footer } from '../../Shell';
 import Table from './Table/Table';

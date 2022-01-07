@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 
-import { UserContext } from "../../../providers";
+import { UserContext } from '../../../providers';
 
-import "./header.css";
+import './header.css';
 
 const Header: React.FC = () => {
   const { userData } = useContext(UserContext);
