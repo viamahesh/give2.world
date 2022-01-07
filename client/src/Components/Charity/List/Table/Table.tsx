@@ -103,7 +103,7 @@ const Table = ({
                 <td>
                   <ul className="action-menu">
                     <li>
-                      <Link to={"/charity/manage/" + item._id}>
+                      <Link to={"/charity/edit/" + item._id}>
                         <i className="fas fa-pen-square"></i>Edit
                       </Link>
                     </li>

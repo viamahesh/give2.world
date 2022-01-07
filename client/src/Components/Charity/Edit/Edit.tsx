@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { useFormik } from 'formik';
 import MaskedInput from 'react-text-mask';
 
@@ -7,7 +8,7 @@ import { addCharityMutation, charityQuery } from '../../../hooks';
 
 import AuthService from '../../../services/auth';
 
-import './add.css';
+import './edit.css';
 
 interface FormValues {
   charityName: string;
@@ -37,9 +38,15 @@ interface FormErrors {
 }
 
 const AddCharity: React.FC = () => {
+  const params = useParams();
   const user: any = AuthService.getProfile();
   const userId = user.data._id;
   const { doAddCharity, error } = addCharityMutation();
+  if(params.id) {
+    console.log(params.id);
+    const { loading, data } = charityQuery(params.id);
+    console.log(data);
+  }
   const [showError, setShowError] = useState(false);
   const phoneNumberMask = [
     '(',

@@ -61,9 +61,9 @@ const Header: React.FC<Props> = ({ breadcrumb }) => {
               </span>
             </Link>
           </li>
-          {breadcrumb && breadcrumb.map((item: string) => {
+          {breadcrumb && breadcrumb.map((item: string, i) => {
             return (
-              <li>
+              <li key={i}>
                 <i className="fas fa-caret-right"></i>
                 <span>{item}</span>
               </li>
