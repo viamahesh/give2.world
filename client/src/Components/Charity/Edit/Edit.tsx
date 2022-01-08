@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useFormik } from 'formik';
 import MaskedInput from 'react-text-mask';
 
@@ -38,6 +38,7 @@ interface FormErrors {
 }
 
 const EditCharity: React.FC = () => {
+  const navigate = useNavigate();
   const user: any = AuthService.getProfile();
   const userId = user.data._id;
   const [initVals, setInitVals] = useState({
@@ -155,7 +156,7 @@ const EditCharity: React.FC = () => {
         const { data } = await doEditCharity({
           variables: {...updateValues},
         });
-        console.log(data);
+        navigate('/charity/list');
       } catch (e) {
         console.log(e);
       }

@@ -35,8 +35,7 @@ export const EDIT_CHARITY = gql`
       owner_ID: $owner_ID
     }
   ) {
-      charityName,
-      phone
+      charityName
     }
   }
 `;
