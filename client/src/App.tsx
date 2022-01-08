@@ -6,6 +6,7 @@ import {
   createHttpLink,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
+import { ToastContainer } from 'react-toast';
 
 import { PrivateRoute, LoggedInRedirectRoute } from './Components/Shared';
 
@@ -62,6 +63,7 @@ const App = () => {
             </Route>
           </Routes>
         </Router>
+        <ToastContainer position='bottom-right' delay={5000} />
       </UserProvider>
     </ApolloProvider>
   );

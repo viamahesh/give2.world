@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import MaskedInput from 'react-text-mask';
+import { toast } from 'react-toast';
 
 import { Header, Footer } from '../../Shell';
 import { addCharityMutation, charityQuery } from '../../../hooks';
@@ -126,6 +127,7 @@ const AddCharity: React.FC = () => {
         const { data } = await doAddCharity({
           variables: { ...values },
         });
+        toast.success(`${data.addCharity.charityName} added successfully`);
         navigate('/charity/list');
       } catch (e) {
         console.log(e);

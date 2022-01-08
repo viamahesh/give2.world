@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useFormik } from 'formik';
 import MaskedInput from 'react-text-mask';
+import { toast } from 'react-toast';
 
 import { Header, Footer } from '../../Shell';
 import { editCharityMutation, charityQuery } from '../../../hooks';
@@ -156,6 +157,7 @@ const EditCharity: React.FC = () => {
         const { data } = await doEditCharity({
           variables: {...updateValues},
         });
+        toast.success(`${data.editCharity.charityName} updated successfully`);
         navigate('/charity/list');
       } catch (e) {
         console.log(e);
