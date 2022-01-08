@@ -1,14 +1,14 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { useFormik } from 'formik';
-import MaskedInput from 'react-text-mask';
+import React, { useContext, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { useFormik } from "formik";
+import MaskedInput from "react-text-mask";
 
-import { Header, Footer } from '../../Shell';
-import { addCharityMutation, charityQuery } from '../../../hooks';
+import { Header, Footer } from "../../Shell";
+import { addCharityMutation, charityQuery } from "../../../hooks";
 
-import AuthService from '../../../services/auth';
+import AuthService from "../../../services/auth";
 
-import './edit.css';
+import "./edit.css";
 
 interface FormValues {
   charityName: string;
@@ -37,32 +37,62 @@ interface FormErrors {
   phone?: string;
 }
 
-const AddCharity: React.FC = () => {
-  const params = useParams();
+const EditCharity: React.FC = () => {
   const user: any = AuthService.getProfile();
   const userId = user.data._id;
+  const [initVals, setInitVals] = useState({
+    charityName: "",
+    missionStatement: "",
+    charityType: "",
+    address1: "",
+    address2: "",
+    city: "",
+    state: "",
+    zipCode: "",
+    contactPerson: "",
+    email: "",
+    phone: "",
+    website: "",
+    owner_ID: userId,
+  });
+  const params = useParams();
   const { doAddCharity, error } = addCharityMutation();
-  if(params.id) {
-    console.log(params.id);
-    const { loading, data } = charityQuery(params.id);
-    console.log(data);
-  }
+  const { loading, data } = charityQuery(params.id);
+  useEffect(() => {
+    if (data) {
+      setInitVals({
+        charityName: data.charity.charityName,
+        missionStatement: data.charity.missionStatement,
+        charityType: data.charity.charityType,
+        address1: data.charity.address1,
+        address2: data.charity.address2,
+        city: data.charity.city,
+        state: data.charity.state,
+        zipCode: data.charity.zipCode,
+        contactPerson: data.charity.contactPerson,
+        email: data.charity.email,
+        phone: data.charity.phone,
+        website: data.charity.website,
+        owner_ID: userId,
+      });
+    }
+  }, [data]);
   const [showError, setShowError] = useState(false);
   const phoneNumberMask = [
-    '(',
+    "(",
     /[1-9]/,
     /\d/,
     /\d/,
-    ')',
-    ' ',
+    ")",
+    " ",
     /\d/,
     /\d/,
     /\d/,
-    '-',
+    "-",
     /\d/,
     /\d/,
     /\d/,
-    /\d/
+    /\d/,
   ];
 
   useEffect(() => {
@@ -77,71 +107,65 @@ const AddCharity: React.FC = () => {
     setShowError(false);
     const errors: FormErrors = {};
     if (!values.charityName) {
-      errors.charityName = 'Charity name is required';
+      errors.charityName = "Charity name is required";
     }
     if (!values.address1) {
-      errors.address1 = 'Address 1 is required';
+      errors.address1 = "Address 1 is required";
     }
     if (!values.city) {
-      errors.city = 'City is required';
+      errors.city = "City is required";
     }
     if (!values.state) {
-      errors.state = 'State is required';
+      errors.state = "State is required";
     }
     if (!values.zipCode) {
-      errors.zipCode = 'Zip Code is required';
+      errors.zipCode = "Zip Code is required";
     } else if (!/(^\d{5}$)|(^\d{5}-\d{4}$)/i.test(values.zipCode)) {
-      errors.zipCode = 'Invalid zip code';
+      errors.zipCode = "Invalid zip code";
     }
     if (!values.contactPerson) {
-      errors.contactPerson = 'Contact Person is required';
+      errors.contactPerson = "Contact Person is required";
     }
     if (!values.email) {
-      errors.email = 'Email is required';
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-      errors.email = 'Invalid email address';
+      errors.email = "Email is required";
+    } else if (
+      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+    ) {
+      errors.email = "Invalid email address";
     }
     if (!values.phone) {
-      errors.phone = 'Phone is required';
-    } else if (!/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im.test(values.phone)) {
-      errors.phone = 'Invalid phone number';
+      errors.phone = "Phone is required";
+    } else if (
+      !/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im.test(
+        values.phone
+      )
+    ) {
+      errors.phone = "Invalid phone number";
     }
     return errors;
   };
 
   const formik = useFormik({
-    initialValues: {
-      charityName: '',
-      missionStatement: '',
-      charityType: '',
-      address1: '',
-      address2: '',
-      city: '',
-      state: '',
-      zipCode: '',
-      contactPerson: '',
-      email: '',
-      phone: '',
-      website: '',
-      owner_ID: userId
-    },
+    initialValues: initVals,
     validate,
+    enableReinitialize: true,
     onSubmit: async (values) => {
-      try {
-        const { data } = await doAddCharity({
-          variables: { ...values },
-        });
-        console.log(data);
-      } catch (e) {
-        console.log(e);
-      }
+      console.log(values);
+      // try {
+      //   const { data } = await doAddCharity({
+      //     variables: { ...values },
+      //   });
+      //   console.log(data);
+      // } catch (e) {
+      //   console.log(e);
+      // }
     },
   });
 
   return (
     <div className="framesheet">
       <div className="wrapper">
-        <Header breadcrumb={["Add Charity"]} />
+        <Header breadcrumb={["Edit Charity"]} />
         <div className="page-container">
           <div className="page-form">
             <form onSubmit={formik.handleSubmit}>
@@ -409,23 +433,15 @@ const AddCharity: React.FC = () => {
                 )}
               </div>
               <button type="submit" className="form-button">
-                Add
+                Edit
               </button>
             </form>
           </div>
           <div className="page-description">
             <p className="page-text">
-              <span className="page-title">Add Your Charity:</span> If your
-              institution does not have a website or an online donation
-              facility, Give2World can help. In fact, even if you have an online
-              donation facility, it is still important that you register with us
-              in order to maximise your online donations. If your charity is not
-              yet listed within the Give2World directory this is not a problem,
-              simply complete the form below.
-            </p>
-            <p className="page-text">
-              We will verify your details and contact you once your institution
-              have been added to the Give2World Directory.
+              <span className="page-title">Edit Your Charity Details:</span> Providing accurate, up-to-date, and complete information about
+              your institution helps donors to reach out to you regarding
+              donations.
             </p>
           </div>
         </div>
@@ -435,4 +451,4 @@ const AddCharity: React.FC = () => {
   );
 };
 
-export default AddCharity;
+export default EditCharity;
