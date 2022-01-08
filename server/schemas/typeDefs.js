@@ -55,6 +55,7 @@ const typeDefs = gql`
   type Mutation {
     signUp(firstName: String!, lastName: String!, email: String!, password: String!): Auth
     addCharity(charityData: CharityInput!): Charity
+    editCharity(_id: ID!, charityData: CharityInput!): Charity
     deleteCharity(_id: ID!): Charity
     login(email: String!, password: String!): Auth
   }

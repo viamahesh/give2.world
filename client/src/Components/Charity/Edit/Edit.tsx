@@ -4,7 +4,7 @@ import { useFormik } from "formik";
 import MaskedInput from "react-text-mask";
 
 import { Header, Footer } from "../../Shell";
-import { addCharityMutation, charityQuery } from "../../../hooks";
+import { editCharityMutation, charityQuery } from "../../../hooks";
 
 import AuthService from "../../../services/auth";
 
@@ -55,9 +55,9 @@ const EditCharity: React.FC = () => {
     website: "",
     owner_ID: userId,
   });
-  const params = useParams();
-  const { doAddCharity, error } = addCharityMutation();
-  const { loading, data } = charityQuery(params.id);
+  const { id } = useParams();
+  const { doEditCharity, error } = editCharityMutation();
+  const { loading, data } = charityQuery(id);
   useEffect(() => {
     if (data) {
       setInitVals({
@@ -151,14 +151,14 @@ const EditCharity: React.FC = () => {
     enableReinitialize: true,
     onSubmit: async (values) => {
       console.log(values);
-      // try {
-      //   const { data } = await doAddCharity({
-      //     variables: { ...values },
-      //   });
-      //   console.log(data);
-      // } catch (e) {
-      //   console.log(e);
-      // }
+      try {
+        const { data } = await doEditCharity({
+          variables: {...values},
+        });
+        console.log(data);
+      } catch (e) {
+        console.log(e);
+      }
     },
   });
 
