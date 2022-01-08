@@ -49,7 +49,7 @@ const resolvers = {
       return res;
     },
     editCharity: async (_, args) => {
-      return await Charity.findByIdAndUpdate(_id, args.charityData, { new: true });
+      return await Charity.findByIdAndUpdate(args.charityData._id, args.charityData, { new: true });
     },
     deleteCharity: async (_, { _id }) => {
       let params = {};

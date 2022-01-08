@@ -34,6 +34,23 @@ const typeDefs = gql`
     owner_ID: String
   }
 
+  input CharityUpdateInput {
+    _id: ID!
+    charityName: String!
+    missionStatement: String
+    charityType: String
+    address1: String
+    address2: String
+    city: String
+    state: String
+    zipCode: String
+    contactPerson: String
+    email: String
+    phone: String
+    website: String
+    owner_ID: String
+  }
+
   type User {
     _id: ID!
     firstName: String!
@@ -55,7 +72,7 @@ const typeDefs = gql`
   type Mutation {
     signUp(firstName: String!, lastName: String!, email: String!, password: String!): Auth
     addCharity(charityData: CharityInput!): Charity
-    editCharity(_id: ID!, charityData: CharityInput!): Charity
+    editCharity(charityData: CharityUpdateInput!): Charity
     deleteCharity(_id: ID!): Charity
     login(email: String!, password: String!): Auth
   }

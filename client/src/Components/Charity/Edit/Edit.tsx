@@ -1,14 +1,14 @@
-import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { useFormik } from "formik";
-import MaskedInput from "react-text-mask";
+import React, { useContext, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { useFormik } from 'formik';
+import MaskedInput from 'react-text-mask';
 
-import { Header, Footer } from "../../Shell";
-import { editCharityMutation, charityQuery } from "../../../hooks";
+import { Header, Footer } from '../../Shell';
+import { editCharityMutation, charityQuery } from '../../../hooks';
 
-import AuthService from "../../../services/auth";
+import AuthService from '../../../services/auth';
 
-import "./edit.css";
+import './edit.css';
 
 interface FormValues {
   charityName: string;
@@ -41,18 +41,18 @@ const EditCharity: React.FC = () => {
   const user: any = AuthService.getProfile();
   const userId = user.data._id;
   const [initVals, setInitVals] = useState({
-    charityName: "",
-    missionStatement: "",
-    charityType: "",
-    address1: "",
-    address2: "",
-    city: "",
-    state: "",
-    zipCode: "",
-    contactPerson: "",
-    email: "",
-    phone: "",
-    website: "",
+    charityName: '',
+    missionStatement: '',
+    charityType: '',
+    address1: '',
+    address2: '',
+    city: '',
+    state: '',
+    zipCode: '',
+    contactPerson: '',
+    email: '',
+    phone: '',
+    website: '',
     owner_ID: userId,
   });
   const { id } = useParams();
@@ -79,16 +79,16 @@ const EditCharity: React.FC = () => {
   }, [data]);
   const [showError, setShowError] = useState(false);
   const phoneNumberMask = [
-    "(",
+    '(',
     /[1-9]/,
     /\d/,
     /\d/,
-    ")",
-    " ",
+    ')',
+    ' ',
     /\d/,
     /\d/,
     /\d/,
-    "-",
+    '-',
     /\d/,
     /\d/,
     /\d/,
@@ -107,40 +107,40 @@ const EditCharity: React.FC = () => {
     setShowError(false);
     const errors: FormErrors = {};
     if (!values.charityName) {
-      errors.charityName = "Charity name is required";
+      errors.charityName = 'Charity name is required';
     }
     if (!values.address1) {
-      errors.address1 = "Address 1 is required";
+      errors.address1 = 'Address 1 is required';
     }
     if (!values.city) {
-      errors.city = "City is required";
+      errors.city = 'City is required';
     }
     if (!values.state) {
-      errors.state = "State is required";
+      errors.state = 'State is required';
     }
     if (!values.zipCode) {
-      errors.zipCode = "Zip Code is required";
+      errors.zipCode = 'Zip Code is required';
     } else if (!/(^\d{5}$)|(^\d{5}-\d{4}$)/i.test(values.zipCode)) {
-      errors.zipCode = "Invalid zip code";
+      errors.zipCode = 'Invalid zip code';
     }
     if (!values.contactPerson) {
-      errors.contactPerson = "Contact Person is required";
+      errors.contactPerson = 'Contact Person is required';
     }
     if (!values.email) {
-      errors.email = "Email is required";
+      errors.email = 'Email is required';
     } else if (
       !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
     ) {
-      errors.email = "Invalid email address";
+      errors.email = 'Invalid email address';
     }
     if (!values.phone) {
-      errors.phone = "Phone is required";
+      errors.phone = 'Phone is required';
     } else if (
       !/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im.test(
         values.phone
       )
     ) {
-      errors.phone = "Invalid phone number";
+      errors.phone = 'Invalid phone number';
     }
     return errors;
   };
@@ -150,10 +150,10 @@ const EditCharity: React.FC = () => {
     validate,
     enableReinitialize: true,
     onSubmit: async (values) => {
-      console.log(values);
+      const updateValues = {...values, id};
       try {
         const { data } = await doEditCharity({
-          variables: {...values},
+          variables: {...updateValues},
         });
         console.log(data);
       } catch (e) {
