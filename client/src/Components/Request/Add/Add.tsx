@@ -70,7 +70,7 @@ const AddRequest: React.FC = () => {
         //   variables: { ...values },
         // });
         toast.success(`Request added successfully`);
-        navigate("/charity/list");
+        navigate('/charity/list');
       } catch (e) {
         console.log(e);
       }
