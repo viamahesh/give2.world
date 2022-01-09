@@ -44,6 +44,7 @@ label {
   margin-bottom: 25px;
 }
 .react-datepicker__input-container input,
+.form-textarea,
 .form-control {
   background-color: #ffffff;
   border: none;
@@ -105,6 +106,11 @@ select::-ms-expand {
   right: -4px;
   width: 30px;
   height: 36px;
+}
+.form-textarea {
+  height: 150px;
+  line-height: 22px;
+  resize: none;
 }
 /* headings */
 .page-container {

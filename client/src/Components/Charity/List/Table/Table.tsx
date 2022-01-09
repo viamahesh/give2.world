@@ -113,7 +113,7 @@ const Table = ({
                       </a>
                     </li>
                     <li>
-                      <Link to="/charity/add">
+                      <Link to={"/request/add/" + item._id}>
                         <i className="fas fa-hand-paper"></i>Request Stuff
                       </Link>
                     </li>

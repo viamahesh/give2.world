@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import MaskedInput from 'react-text-mask';
-// import { toast } from 'react-toast';
+import { toast } from 'react-toast';
 
 import { Header, Footer } from '../../Shell';
-// import { addCharityMutation, charityQuery } from '../../../hooks';
+import { addRequestMutation } from '../../../hooks';
 
 import './add.css';
 
@@ -23,19 +23,19 @@ interface FormErrors {
 
 const AddRequest: React.FC = () => {
   const navigate = useNavigate();
-  // const { doAddCharity, error } = addCharityMutation();
+  const { doAddRequest, error } = addRequestMutation();
   const [showError, setShowError] = useState(false);
 
-  // useEffect(() => {
-  //   if (error) {
-  //     setShowError(true);
-  //   } else {
-  //     setShowError(false);
-  //   }
-  // }, [error]);
+  useEffect(() => {
+    if (error) {
+      setShowError(true);
+    } else {
+      setShowError(false);
+    }
+  }, [error]);
 
   const isFutureDate = (date: string) => {
-    let dateArr: string[] = date.split("-");
+    let dateArr: string[] = date.split('-');
     let inputDate = new Date(`${dateArr[2]}-${dateArr[0]}-${dateArr[1]}`);
     let currentDate = new Date();
     return inputDate > currentDate ? true : false;
@@ -60,9 +60,8 @@ const AddRequest: React.FC = () => {
     initialValues: {
       requestTitle: '',
       requestDescription: '',
-      neededDate: ''
+      neededDate: '',
     },
-    enableReinitialize: true,
     validate,
     onSubmit: async (values) => {
       try {
@@ -70,8 +69,8 @@ const AddRequest: React.FC = () => {
         // const { data } = await doAddCharity({
         //   variables: { ...values },
         // });
-        // toast.success(`${data.addCharity.charityName} added successfully`);
-        // navigate('/charity/list');
+        toast.success(`Request added successfully`);
+        navigate("/charity/list");
       } catch (e) {
         console.log(e);
       }
@@ -105,16 +104,17 @@ const AddRequest: React.FC = () => {
               </div>
               <div className="form-group">
                 <label htmlFor="requestDescription">Request Description</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="requestDescription"
+                <textarea
+                  className="form-textarea"
                   name="requestDescription"
+                  id="requestDescription"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  value={formik.values.requestDescription}
-                />
-                {formik.touched.requestDescription && formik.errors.requestDescription ? (
+                >
+                  {formik.values.requestDescription}
+                </textarea>
+                {formik.touched.requestDescription &&
+                formik.errors.requestDescription ? (
                   <span className="error-text">
                     <i className="fas fa-exclamation-circle"></i>
                     {formik.errors.requestDescription}
@@ -122,9 +122,22 @@ const AddRequest: React.FC = () => {
                 ) : null}
               </div>
               <div className="form-group">
-                <label htmlFor="neededDate">Needed on or before (MM-DD-YYYY)</label>
+                <label htmlFor="neededDate">
+                  Needed on or before (MM-DD-YYYY)
+                </label>
                 <MaskedInput
-                  mask={[/\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
+                  mask={[
+                    /\d/,
+                    /\d/,
+                    "-",
+                    /\d/,
+                    /\d/,
+                    "-",
+                    /\d/,
+                    /\d/,
+                    /\d/,
+                    /\d/,
+                  ]}
                   type="text"
                   className="form-control"
                   id="neededDate"
@@ -139,6 +152,12 @@ const AddRequest: React.FC = () => {
                     {formik.errors.neededDate}
                   </span>
                 ) : null}
+                {showError && (
+                  <span className="error-text">
+                    <i className="fas fa-exclamation-circle"></i>
+                    Operation failed. Please try again
+                  </span>
+                )}
               </div>
               <button type="submit" className="form-button">
                 Request
@@ -147,17 +166,10 @@ const AddRequest: React.FC = () => {
           </div>
           <div className="page-description">
             <p className="page-text">
-              <span className="page-title">Add Your Charity:</span> If your
-              institution does not have a website or an online donation
-              facility, Give2World can help. In fact, even if you have an online
-              donation facility, it is still important that you register with us
-              in order to maximise your online donations. If your charity is not
-              yet listed within the Give2World directory this is not a problem,
-              simply complete the form below.
-            </p>
-            <p className="page-text">
-              We will verify your details and contact you once your institution
-              have been added to the Give2World Directory.
+              <span className="page-title">Request Stuff:</span> Asking
+              individuals for donations is one of the most common fundraising
+              strategies used by nonprofits. Use this form to request donations
+              to your institution.
             </p>
           </div>
         </div>
