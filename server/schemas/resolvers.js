@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Charity } = require('../models');
+const { User, Charity, Request } = require('../models');
 const { signToken } = require('../utils/auth');
 const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
@@ -49,7 +49,7 @@ const resolvers = {
       return res;
     },
     addRequest: async (_, args) => {
-      const res = await Request.create(args.requestData);
+      const res = await Request.create(args);
       return res;
     },
     editCharity: async (_, args) => {
