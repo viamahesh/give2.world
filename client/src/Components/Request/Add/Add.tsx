@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
 import { useFormik } from 'formik';
+import MaskedInput from 'react-text-mask';
 // import { toast } from 'react-toast';
 
 import { Header, Footer } from '../../Shell';
@@ -13,19 +12,19 @@ import './add.css';
 interface FormValues {
   requestTitle: string;
   requestDescription: string;
-  neededDate: Date | null;
+  neededDate: string;
 }
 
 interface FormErrors {
   requestTitle?: string;
   requestDescription?: string;
+  neededDate?: string;
 }
 
 const AddRequest: React.FC = () => {
   const navigate = useNavigate();
   // const { doAddCharity, error } = addCharityMutation();
   const [showError, setShowError] = useState(false);
-  const [neededDate, setNeededDate] = useState<Date | null>(new Date());
 
   // useEffect(() => {
   //   if (error) {
@@ -34,6 +33,13 @@ const AddRequest: React.FC = () => {
   //     setShowError(false);
   //   }
   // }, [error]);
+
+  const isFutureDate = (date: string) => {
+    let dateArr: string[] = date.split("-");
+    let inputDate = new Date(`${dateArr[2]}-${dateArr[0]}-${dateArr[1]}`);
+    let currentDate = new Date();
+    return inputDate > currentDate ? true : false;
+  };
 
   const validate = (values: FormValues) => {
     setShowError(false);
@@ -44,6 +50,9 @@ const AddRequest: React.FC = () => {
     if (!values.requestDescription || values.requestDescription.length < 5) {
       errors.requestDescription = 'Description is required';
     }
+    if (values.neededDate && !isFutureDate(values.neededDate)) {
+      errors.neededDate = 'Needed date must be in the future';
+    }
     return errors;
   };
 
@@ -51,13 +60,13 @@ const AddRequest: React.FC = () => {
     initialValues: {
       requestTitle: '',
       requestDescription: '',
-      neededDate: neededDate
+      neededDate: ''
     },
     enableReinitialize: true,
     validate,
     onSubmit: async (values) => {
       try {
-        console.log(values);
+        console.log(values.neededDate);
         // const { data } = await doAddCharity({
         //   variables: { ...values },
         // });
@@ -113,8 +122,23 @@ const AddRequest: React.FC = () => {
                 ) : null}
               </div>
               <div className="form-group">
-                <label htmlFor="neededDate">Needed on or before</label>
-                <DatePicker selected={neededDate} onChange={(date) => setNeededDate(date)} />
+                <label htmlFor="neededDate">Needed on or before (MM-DD-YYYY)</label>
+                <MaskedInput
+                  mask={[/\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
+                  type="text"
+                  className="form-control"
+                  id="neededDate"
+                  name="neededDate"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.neededDate}
+                />
+                {formik.touched.neededDate && formik.errors.neededDate ? (
+                  <span className="error-text">
+                    <i className="fas fa-exclamation-circle"></i>
+                    {formik.errors.neededDate}
+                  </span>
+                ) : null}
               </div>
               <button type="submit" className="form-button">
                 Request
