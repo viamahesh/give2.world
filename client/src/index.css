@@ -43,6 +43,7 @@ label {
 .form-group {
   margin-bottom: 25px;
 }
+.react-datepicker__input-container input,
 .form-control {
   background-color: #ffffff;
   border: none;

@@ -19,7 +19,6 @@ interface FormValues {
 interface FormErrors {
   requestTitle?: string;
   requestDescription?: string;
-  neededDate?: string;
 }
 
 const AddRequest: React.FC = () => {
@@ -39,14 +38,11 @@ const AddRequest: React.FC = () => {
   const validate = (values: FormValues) => {
     setShowError(false);
     const errors: FormErrors = {};
-    if (!values.requestTitle) {
+    if (!values.requestTitle || values.requestTitle.length < 5) {
       errors.requestTitle = 'Title name is required';
     }
-    if (!values.requestDescription) {
+    if (!values.requestDescription || values.requestDescription.length < 5) {
       errors.requestDescription = 'Description is required';
-    }
-    if (!values.neededDate) {
-      errors.neededDate = 'Date is required';
     }
     return errors;
   };
