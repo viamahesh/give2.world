@@ -48,6 +48,10 @@ const resolvers = {
       const res = await Charity.create(args.charityData);
       return res;
     },
+    addRequest: async (_, args) => {
+      const res = await Request.create(args.requestData);
+      return res;
+    },
     editCharity: async (_, args) => {
       return await Charity.findByIdAndUpdate(args.charityData._id, args.charityData, { new: true });
     },

@@ -63,6 +63,31 @@ const typeDefs = gql`
     user: User
   }
 
+  input CommentInput {
+    message: String!
+    donorName: String!
+    donorPhone: String!
+    donorEmail: String!
+  }
+
+  type Comment {
+    _id: ID!
+    message: String!
+    donorName: String!
+    donorPhone: String!
+    donorEmail: String!
+  }
+
+  type Request {
+    _id: ID!
+    requestTitle: String
+    requestDescription: String
+    neededDate: String
+    isFulfilled: String
+    comments: [Comment]
+    charity_ID: String
+  }
+
   type Query {
     charities(owner_ID: String): [Charity]
     charity(_id: ID!): Charity
@@ -72,6 +97,7 @@ const typeDefs = gql`
   type Mutation {
     signUp(firstName: String!, lastName: String!, email: String!, password: String!): Auth
     addCharity(charityData: CharityInput!): Charity
+    addRequest(requestTitle: String!, requestDescription: String!, neededDate: String, isFulfilled: Boolean!, comments: [CommentInput], charity_ID: String!): Request
     editCharity(charityData: CharityUpdateInput!): Charity
     deleteCharity(_id: ID!): Charity
     login(email: String!, password: String!): Auth

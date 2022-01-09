@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useFormik } from 'formik';
 import MaskedInput from 'react-text-mask';
 import { toast } from 'react-toast';
@@ -22,6 +22,7 @@ interface FormErrors {
 }
 
 const AddRequest: React.FC = () => {
+  const { charityId } = useParams();
   const navigate = useNavigate();
   const { doAddRequest, error } = addRequestMutation();
   const [showError, setShowError] = useState(false);
@@ -65,10 +66,15 @@ const AddRequest: React.FC = () => {
     validate,
     onSubmit: async (values) => {
       try {
-        console.log(values.neededDate);
-        // const { data } = await doAddCharity({
-        //   variables: { ...values },
-        // });
+        const updateValues = {
+          ...values, 
+          isFulfilled: false,
+          comments: [],
+          charity_ID: charityId
+        };
+        const { data } = await doAddRequest({
+          variables: { ...updateValues },
+        });
         toast.success(`Request added successfully`);
         navigate('/charity/list');
       } catch (e) {
@@ -110,8 +116,8 @@ const AddRequest: React.FC = () => {
                   id="requestDescription"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
+                  value={formik.values.requestDescription}
                 >
-                  {formik.values.requestDescription}
                 </textarea>
                 {formik.touched.requestDescription &&
                 formik.errors.requestDescription ? (
