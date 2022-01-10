@@ -113,7 +113,7 @@ const Table = ({
                       </a>
                     </li>
                     <li>
-                      <Link to={"/request/add/" + item._id}>
+                      <Link to={"/request/list/" + item._id}>
                       <i className="fas fa-tasks"></i>Manage Requests
                       </Link>
                     </li>

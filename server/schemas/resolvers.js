@@ -14,6 +14,15 @@ const resolvers = {
       }
       return await Charity.find(params);
     },
+    requests: async (parent, { charity_ID }) => {
+      let params = {};
+      if (charity_ID) {
+        params = {
+          charity_ID
+        };
+      }
+      return await Request.find(params);
+    },
     charity: async (parent, { _id }) => {
       return await Charity.findById(_id);
     },

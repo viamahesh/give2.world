@@ -11,7 +11,7 @@ import { ToastContainer } from 'react-toast';
 import { PrivateRoute, LoggedInRedirectRoute } from './Components/Shared';
 
 import { AddCharity, EditCharity, CharityList } from './Components/Charity';
-import { AddRequest } from './Components/Request';
+import { AddRequest, RequestList } from './Components/Request';
 import { Home } from './Components/Home';
 import { Login, SignUp } from './Components/User';
 import { UserProvider } from './providers';
@@ -59,6 +59,12 @@ const App = () => {
             <Route path="/request/add/:charityId" element={<PrivateRoute />}>
               <Route path="/request/add/:charityId" element={<AddRequest />} />
             </Route>
+
+            <Route path="/request/list/:charityId" element={<PrivateRoute />}>
+              <Route path="/request/list/:charityId" element={<RequestList />}></Route>
+            </Route>
+
+
             <Route path="/user/login" element={<LoggedInRedirectRoute />}>
               <Route path="/user/login" element={<Login />}></Route>
             </Route>

@@ -90,6 +90,7 @@ const typeDefs = gql`
 
   type Query {
     charities(owner_ID: String): [Charity]
+    requests(charity_ID: String): [Request]
     charity(_id: ID!): Charity
     user: User
   }

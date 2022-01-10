@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 import { Header, Footer } from '../../Shell';
 import Table from './Table/Table';
-import { charityListQuery } from '../../../hooks';
-import { CharityProvider } from '../../../providers';
-
-import AuthService from '../../../services/auth';
+import { requestListQuery } from '../../../hooks';
+import { RequestProvider } from '../../../providers';
 
 import './list.css';
 
-const CharityList = () => {
-  const user: any = AuthService.getProfile();
-  const userId = user.data._id;
-  const { loading, error, data, refetch } = charityListQuery(userId);
+const RequestList = () => {
+  const { charityId } = useParams();
+  const { loading, error, data, refetch } = requestListQuery(charityId);
   const [showError, setShowError] = useState(false);
 
   useEffect(() => {
@@ -34,9 +32,9 @@ const CharityList = () => {
       <div className="wrapper">
         <Header />
         <div className="page-container">
-          <CharityProvider value={() => onRefetch()}>
-            <Table data={data.charities} userId={userId} />
-          </CharityProvider>
+          <RequestProvider value={() => onRefetch()}>
+            <Table data={data.requests} charityId={charityId} />
+          </RequestProvider>
           {showError && (
             <span className="error-text">
               <i className="fas fa-exclamation-circle"></i>
@@ -50,4 +48,4 @@ const CharityList = () => {
   );
 };
 
-export default CharityList;
+export default RequestList;

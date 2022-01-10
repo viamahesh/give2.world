@@ -4,29 +4,29 @@ import { confirmAlert } from "react-confirm-alert";
 import { Link } from "react-router-dom";
 
 import { CharityContext } from "../../../../providers";
-import { QUERY_CHARITIES, deleteCharityMutation } from "../../../../hooks";
+import { QUERY_REQUESTS } from "../../../../hooks";
 
 import "./table.css";
 
-interface CharityItemInterface {
+interface RequestItemInterface {
   _id: string;
-  charityName: string;
-  city: string;
-  state: string;
-  contactPerson: string;
-  email: string;
-  phone: string;
+  requestTitle: string;
+  requestDescription: string;
+  neededDate: string;
+  isFulfilled: boolean;
+  comments: any;
+  charity_ID: string;
 }
 
 const Table = ({
   data,
-  userId,
+  charityId,
 }: {
-  data: CharityItemInterface[];
-  userId: string | null;
+  data: RequestItemInterface[];
+  charityId: string | undefined;
 }) => {
   const refetch = useContext(CharityContext) as any;
-  const doDeleteCharity = deleteCharityMutation();
+  // const doDeleteCharity = deleteCharityMutation();
   const [showError, setShowError] = useState(false);
 
   const onHandleDelete = (id: string) => {
@@ -42,20 +42,20 @@ const Table = ({
             <button
               onClick={async () => {
                 try {
-                  await doDeleteCharity({
-                    variables: {
-                      id
-                    },
-                    refetchQueries: () => [
-                      {
-                        query: QUERY_CHARITIES,
-                        variables: {
-                          owner_ID: userId,
-                        },
-                      },
-                    ],
-                  });
-                  setShowError(false);
+                  // await doDeleteCharity({
+                  //   variables: {
+                  //     id
+                  //   },
+                  //   refetchQueries: () => [
+                  //     {
+                  //       query: QUERY_REQUESTS,
+                  //       variables: {
+                  //         charity_ID: charityId
+                  //       },
+                  //     },
+                  //   ],
+                  // });
+                  // setShowError(false);
                   refetch();
                 } catch (error) {
                   setShowError(true);
@@ -81,27 +81,21 @@ const Table = ({
       <table className="data-table charity-list">
         <thead>
           <tr>
-            <th>Charity Name</th>
-            <th>City</th>
-            <th>State</th>
-            <th>Contact Person</th>
-            <th>Email</th>
-            <th>Phone</th>
+            <th>Title</th>
+            <th>Needed on or before</th>
+            <th>Is fulfilled</th>
             <th></th>
           </tr>
         </thead>
         <tbody>
-          {data.map((item: CharityItemInterface) => {
+          {data.map((item: RequestItemInterface) => {
             return (
               <tr key={item._id}>
-                <td>{item.charityName}</td>
-                <td>{item.city}</td>
-                <td>{item.state}</td>
-                <td>{item.contactPerson}</td>
-                <td>{item.email}</td>
-                <td>{item.phone}</td>
+                <td>{item.requestTitle}</td>
+                <td>{item.neededDate}</td>
+                <td>{item.isFulfilled}</td>
                 <td>
-                  <ul className="action-menu">
+                  {/* <ul className="action-menu">
                     <li>
                       <Link to={"/charity/edit/" + item._id}>
                         <i className="fas fa-pen-square"></i>Edit
@@ -117,7 +111,7 @@ const Table = ({
                       <i className="fas fa-tasks"></i>Manage Requests
                       </Link>
                     </li>
-                  </ul>
+                  </ul> */}
                 </td>
               </tr>
             );
