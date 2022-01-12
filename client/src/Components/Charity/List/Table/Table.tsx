@@ -87,7 +87,7 @@ const Table = ({
             <th>Contact Person</th>
             <th>Email</th>
             <th>Phone</th>
-            <th></th>
+            <th className="text-center"><span className="new-btn"><i className="fas fa-plus"></i>Add new charity</span></th>
           </tr>
         </thead>
         <tbody>

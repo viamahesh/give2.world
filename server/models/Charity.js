@@ -60,6 +60,9 @@ const charitySchema = new Schema({
     type: String,
     required: true,
   }
+},
+{
+  timestamps: true
 });
 
 const Charity = mongoose.model('Charity', charitySchema);

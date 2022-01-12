@@ -27,6 +27,9 @@ h3 {
 a {
   text-decoration: none;
 }
+.text-center {
+  text-align: center!important;
+}
 .framesheet {
   background: #fbf1e5 url("./assets/images/header-bg.png") 0 0 repeat-x;
   width: 100%;
@@ -351,4 +354,22 @@ body.react-confirm-alert-body-element {
 .no-data-text i,
 .error-text i {
   margin-right: 10px;
+}
+.new-btn {
+  background: #ffffff;
+  border: 2px solid #ff99cc;
+  border-radius: 5px;
+  color: #f2797c;
+  font-family: "Work Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 12px;
+  margin-left: 10px;
+  padding: 3px 5px;
+}
+.new-btn i {
+  margin-right: 5px;
+}
+.new-btn:hover{
+  cursor: pointer;
 }

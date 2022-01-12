@@ -1,16 +1,17 @@
-.charity-list-container {
+.request-list-container {
   width: 100%;
 }
-.charity-list th:nth-child(1),
-.charity-list th:nth-child(4),
-.charity-list th:nth-child(6),
-.charity-list th:nth-child(7) {
-  width: 15%;
+.request-list th:nth-child(1) {
+  width: 30%;
 }
-.charity-list th:nth-child(2),
-.charity-list th:nth-child(3) {
+.request-list th:nth-child(2),
+.request-list th:nth-child(3),
+.request-list th:nth-child(5) {
+  width: 20%;
+}
+.request-list th:nth-child(4) {
   width: 10%;
 }
-.charity-list th:nth-child(5) {
-  width: 20%;
+.logout:hover {
+  cursor: pointer;
 }

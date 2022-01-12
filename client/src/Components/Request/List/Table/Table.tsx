@@ -72,19 +72,25 @@ const Table = ({
     });
   };
 
-  if(data.length === 0) {
-    return (<div className="no-data-text"><i className="fas fa-hourglass-start"></i>No charities available, please add your charity to start the process.</div>);
+  if (data.length === 0) {
+    return (
+      <div className="no-data-text">
+        <i className="fas fa-hourglass-start"></i>No charities available, please
+        add your charity to start the process.
+      </div>
+    );
   }
 
   return (
-    <div className="charity-list-container">
-      <table className="data-table charity-list">
+    <div className="request-list-container">
+      <table className="data-table request-list">
         <thead>
           <tr>
             <th>Title</th>
             <th>Needed on or before</th>
-            <th>Is fulfilled</th>
-            <th></th>
+            <th>Added on</th>
+            <th>Completed</th>
+            <th className="text-center"><span className="new-btn"><i className="fas fa-plus"></i>Add a request</span></th>
           </tr>
         </thead>
         <tbody>
@@ -93,12 +99,13 @@ const Table = ({
               <tr key={item._id}>
                 <td>{item.requestTitle}</td>
                 <td>{item.neededDate}</td>
-                <td>{item.isFulfilled}</td>
+                <td>{item.neededDate}</td>
+                <td>{item.isFulfilled === true ? "Yes" : "No"}</td>
                 <td>
-                  {/* <ul className="action-menu">
-                    <li>
+                  <ul className="action-menu">
+                  <li>
                       <Link to={"/charity/edit/" + item._id}>
-                        <i className="fas fa-pen-square"></i>Edit
+                        <i className="fas fa-check-square"></i>Mark as complete
                       </Link>
                     </li>
                     <li>
@@ -106,12 +113,7 @@ const Table = ({
                         <i className="fas fa-trash-alt"></i>Delete
                       </a>
                     </li>
-                    <li>
-                      <Link to={"/request/add/" + item._id}>
-                      <i className="fas fa-tasks"></i>Manage Requests
-                      </Link>
-                    </li>
-                  </ul> */}
+                  </ul>
                 </td>
               </tr>
             );
@@ -119,11 +121,11 @@ const Table = ({
         </tbody>
       </table>
       {showError && (
-          <span className="error-text">
-            <i className="fas fa-exclamation-circle"></i>
-            Operation failed. Please try again
-          </span>
-        )}
+        <span className="error-text">
+          <i className="fas fa-exclamation-circle"></i>
+          Operation failed. Please try again
+        </span>
+      )}
     </div>
   );
 };

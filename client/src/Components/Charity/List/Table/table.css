@@ -3,9 +3,8 @@
 }
 .charity-list th:nth-child(1),
 .charity-list th:nth-child(4),
-.charity-list th:nth-child(6),
-.charity-list th:nth-child(7) {
-  width: 15%;
+.charity-list th:nth-child(6){
+  width: 13%;
 }
 .charity-list th:nth-child(2),
 .charity-list th:nth-child(3) {
@@ -13,4 +12,7 @@
 }
 .charity-list th:nth-child(5) {
   width: 20%;
+}
+.charity-list th:nth-child(7) {
+  width: 21px;
 }

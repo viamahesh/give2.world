@@ -22,6 +22,9 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+},
+{
+  timestamps: true
 });
 
 userSchema.post('save', function(error, doc, next) {
