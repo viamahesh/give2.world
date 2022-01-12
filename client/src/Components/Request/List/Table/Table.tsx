@@ -90,7 +90,11 @@ const Table = ({
             <th>Needed on or before</th>
             <th>Added on</th>
             <th>Completed</th>
-            <th className="text-center"><span className="new-btn"><i className="fas fa-plus"></i>Add a request</span></th>
+            <th className="text-center">
+              <Link to={"/request/add/" + charityId}>
+                <span className="new-btn"><i className="fas fa-plus"></i>Add a request</span>
+              </Link>
+            </th>
           </tr>
         </thead>
         <tbody>
