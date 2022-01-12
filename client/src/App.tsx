@@ -59,12 +59,9 @@ const App = () => {
             <Route path="/request/add/:charityId" element={<PrivateRoute />}>
               <Route path="/request/add/:charityId" element={<AddRequest />} />
             </Route>
-
             <Route path="/request/list/:charityId" element={<PrivateRoute />}>
               <Route path="/request/list/:charityId" element={<RequestList />}></Route>
             </Route>
-
-
             <Route path="/user/login" element={<LoggedInRedirectRoute />}>
               <Route path="/user/login" element={<Login />}></Route>
             </Route>
