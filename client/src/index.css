@@ -30,6 +30,12 @@ a {
 .text-center {
   text-align: center!important;
 }
+.text-bold {
+  font-weight: 600;
+}
+.highlight-text {
+  color: #f2797c;
+}
 .framesheet {
   background: #fbf1e5 url("./assets/images/header-bg.png") 0 0 repeat-x;
   width: 100%;
@@ -118,8 +124,17 @@ select::-ms-expand {
 /* headings */
 .page-container {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   margin: 30px 0;
+}
+.default-text {
+  flex-basis: 100%;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+.default-text i {
+  margin-right: 10px;
 }
 .page-form {
   flex-basis: 45%;

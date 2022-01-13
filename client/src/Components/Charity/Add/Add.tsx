@@ -5,7 +5,7 @@ import MaskedInput from 'react-text-mask';
 import { toast } from 'react-toast';
 
 import { Header, Footer } from '../../Shell';
-import { addCharityMutation, charityQuery } from '../../../hooks';
+import { addCharityMutation } from '../../../hooks';
 
 import AuthService from '../../../services/auth';
 

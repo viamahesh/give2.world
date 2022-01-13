@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useFormik } from 'formik';
 import MaskedInput from 'react-text-mask';
@@ -164,6 +164,8 @@ const EditCharity: React.FC = () => {
       }
     },
   });
+
+  if (loading) return <span className='loading-ani'></span>;
 
   return (
     <div className="framesheet">

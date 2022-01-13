@@ -1,10 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
-import { gql } from "@apollo/client";
+import React, { useContext, useState } from "react";
 import { confirmAlert } from "react-confirm-alert";
 import { Link } from "react-router-dom";
 
 import { CharityContext } from "../../../../providers";
-import { QUERY_REQUESTS } from "../../../../hooks";
 
 import "./table.css";
 
@@ -26,7 +24,6 @@ const Table = ({
   charityId: string | undefined;
 }) => {
   const refetch = useContext(CharityContext) as any;
-  // const doDeleteCharity = deleteCharityMutation();
   const [showError, setShowError] = useState(false);
 
   const onHandleDelete = (id: string) => {
@@ -42,20 +39,6 @@ const Table = ({
             <button
               onClick={async () => {
                 try {
-                  // await doDeleteCharity({
-                  //   variables: {
-                  //     id
-                  //   },
-                  //   refetchQueries: () => [
-                  //     {
-                  //       query: QUERY_REQUESTS,
-                  //       variables: {
-                  //         charity_ID: charityId
-                  //       },
-                  //     },
-                  //   ],
-                  // });
-                  // setShowError(false);
                   refetch();
                 } catch (error) {
                   setShowError(true);
