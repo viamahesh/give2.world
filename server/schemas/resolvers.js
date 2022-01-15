@@ -71,11 +71,23 @@ const resolvers = {
           _id
         };
       } else {
-        throw new AuthenticationError('Missing ID for an delete operation');
+        throw new Error('Missing ID for an delete operation');
       }
       const res = await Charity.findByIdAndDelete(params);
       return res;
     },
+    deleteRequest: async (_, { _id }) => {
+      let params = {};
+      if (_id) {
+        params = {
+          _id
+        };
+      } else {
+        throw new Error('Missing ID for an delete operation');
+      }
+      const res = await Request.findByIdAndDelete(params);
+      return res;
+    }
   }
 };
 

@@ -1,12 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
-import { gql } from "@apollo/client";
-import { confirmAlert } from "react-confirm-alert";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from 'react';
+import { confirmAlert } from 'react-confirm-alert';
+import { Link } from 'react-router-dom';
 
-import { CharityContext } from "../../../../providers";
-import { QUERY_CHARITIES, deleteCharityMutation } from "../../../../hooks";
+import { CharityContext } from '../../../../providers';
+import { QUERY_CHARITIES, deleteCharityMutation } from '../../../../hooks';
 
-import "./table.css";
+import './table.css';
 
 interface CharityItemInterface {
   _id: string;

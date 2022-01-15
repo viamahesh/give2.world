@@ -4,6 +4,7 @@ export { default as addCharityMutation } from './useAddCharityMutation';
 export { default as addRequestMutation } from './useAddRequestMutation';
 export { default as editCharityMutation } from './useEditCharityMutation';
 export { default as deleteCharityMutation } from './useDeleteCharityMutation';
+export { default as deleteRequestMutation } from './useDeleteRequestMutation';
 export { QUERY_CHARITIES, default as charityListQuery } from './useCharityListQuery';
 export { QUERY_REQUESTS, default as requestListQuery } from './useRequestListQuery';
 export { default as charityQuery } from './useCharityQuery';

@@ -102,6 +102,7 @@ const typeDefs = gql`
     addRequest(requestTitle: String!, requestDescription: String!, neededDate: String, isFulfilled: Boolean!, comments: [CommentInput], charity_ID: String!): Request
     editCharity(charityData: CharityUpdateInput!): Charity
     deleteCharity(_id: ID!): Charity
+    deleteRequest(_id: ID!): Request
     login(email: String!, password: String!): Auth
   }
 `;

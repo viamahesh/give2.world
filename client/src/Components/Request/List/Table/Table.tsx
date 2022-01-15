@@ -1,11 +1,12 @@
-import React, { useContext, useState } from "react";
-import { confirmAlert } from "react-confirm-alert";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from 'react';
+import { confirmAlert } from 'react-confirm-alert';
+import { Link } from 'react-router-dom';
 
 import { DisplayDate } from '../../../Shared';
-import { CharityContext } from "../../../../providers";
+import { RequestContext } from '../../../../providers';
+import { QUERY_REQUESTS, deleteRequestMutation } from '../../../../hooks';
 
-import "./table.css";
+import './table.css';
 
 interface RequestItemInterface {
   _id: string;
@@ -25,7 +26,8 @@ const Table = ({
   data: RequestItemInterface[];
   charityId: string | undefined;
 }) => {
-  const refetch = useContext(CharityContext) as any;
+  const refetch = useContext(RequestContext) as any;
+  const doDeleteRequest = deleteRequestMutation();
   const [showError, setShowError] = useState(false);
 
   const onHandleDelete = (id: string) => {
@@ -34,13 +36,27 @@ const Table = ({
         return (
           <div className="custom-ui">
             <h1>Confirm the action</h1>
-            <p>Do you really want to delete this Charity and all it's data?</p>
+            <p>Do you really want to delete this Request and all it's comments?</p>
             <button className="no-button" onClick={onClose}>
               No
             </button>
             <button
               onClick={async () => {
                 try {
+                  await doDeleteRequest({
+                    variables: {
+                      id
+                    },
+                    refetchQueries: () => [
+                      {
+                        query: QUERY_REQUESTS,
+                        variables: {
+                          charityId,
+                        },
+                      },
+                    ],
+                  });
+                  setShowError(false);
                   refetch();
                 } catch (error) {
                   setShowError(true);
