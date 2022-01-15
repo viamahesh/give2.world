@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { confirmAlert } from "react-confirm-alert";
 import { Link } from "react-router-dom";
 
+import { DisplayDate } from '../../../Shared';
 import { CharityContext } from "../../../../providers";
 
 import "./table.css";
@@ -14,6 +15,7 @@ interface RequestItemInterface {
   isFulfilled: boolean;
   comments: any;
   charity_ID: string;
+  createdAt: string;
 }
 
 const Table = ({
@@ -86,7 +88,7 @@ const Table = ({
               <tr key={item._id}>
                 <td>{item.requestTitle}</td>
                 <td>{item.neededDate}</td>
-                <td>{item.neededDate}</td>
+                <td><DisplayDate dateString={item.createdAt}/></td>
                 <td>{item.isFulfilled === true ? "Yes" : "No"}</td>
                 <td>
                   <ul className="action-menu">

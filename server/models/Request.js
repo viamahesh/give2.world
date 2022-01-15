@@ -26,10 +26,11 @@ const requestSchema = new Schema({
   charity_ID: {
     type: String,
     required: true,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
   }
-},
-{
-  timestamps: true
 });
 
 const Request = mongoose.model('Request', requestSchema);

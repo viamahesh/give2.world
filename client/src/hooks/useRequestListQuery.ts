@@ -16,6 +16,7 @@ export const QUERY_REQUESTS = gql`
         donorEmail
       }
       charity_ID
+      createdAt
     }
   }
 `;

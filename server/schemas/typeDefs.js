@@ -86,6 +86,7 @@ const typeDefs = gql`
     isFulfilled: String
     comments: [Comment]
     charity_ID: String
+    createdAt: String!
   }
 
   type Query {
