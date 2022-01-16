@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
-import { Header, Footer } from '../../Shell';
-import Table from './Table/Table';
-import { charityListQuery } from '../../../hooks';
-import { CharityProvider } from '../../../providers';
+import { Header, Footer } from "../../Shell";
+import Table from "./Table/Table";
+import { charityListQuery } from "../../../hooks";
+import { CharityProvider } from "../../../providers";
 
-import AuthService from '../../../services/auth';
+import AuthService from "../../../services/auth";
 
-import './list.css';
+import "./list.css";
 
 const CharityList = () => {
   const user: any = AuthService.getProfile();
@@ -27,13 +27,18 @@ const CharityList = () => {
     refetch();
   };
 
-  if (loading) return <span className='loading-ani'></span>;
+  if (loading) return <span className="loading-ani"></span>;
 
   return (
     <div className="framesheet">
       <div className="wrapper">
         <Header />
         <div className="page-container">
+          <p className="page-text">
+            <span className="page-title">Charity Dashboard:</span> Hi and
+            welcome to your admin panel. The list below shows all your
+            institutions and also the options to manage them.
+          </p>
           <CharityProvider value={() => onRefetch()}>
             <Table data={data.charities} userId={userId} />
           </CharityProvider>
