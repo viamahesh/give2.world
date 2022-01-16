@@ -101,6 +101,7 @@ const typeDefs = gql`
     addCharity(charityData: CharityInput!): Charity
     addRequest(requestTitle: String!, requestDescription: String!, neededDate: String, isFulfilled: Boolean!, comments: [CommentInput], charity_ID: String!): Request
     editCharity(charityData: CharityUpdateInput!): Charity
+    setRequestCompleteStatus(_id: ID!, isFulfilled: Boolean!): Request
     deleteCharity(_id: ID!): Charity
     deleteRequest(_id: ID!): Request
     login(email: String!, password: String!): Auth

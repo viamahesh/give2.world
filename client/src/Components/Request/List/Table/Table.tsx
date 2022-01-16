@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { DisplayDate } from '../../../Shared';
 import { RequestContext } from '../../../../providers';
-import { QUERY_REQUESTS, deleteRequestMutation } from '../../../../hooks';
+import { QUERY_REQUESTS, deleteRequestMutation, setRequestCompleteStatusMutation } from '../../../../hooks';
 
 import './table.css';
 
@@ -13,7 +13,7 @@ interface RequestItemInterface {
   requestTitle: string;
   requestDescription: string;
   neededDate: string;
-  isFulfilled: boolean;
+  isFulfilled: boolean | string;
   comments: any;
   charity_ID: string;
   createdAt: string;
@@ -28,6 +28,7 @@ const Table = ({
 }) => {
   const refetch = useContext(RequestContext) as any;
   const doDeleteRequest = deleteRequestMutation();
+  const doSetRequestCompleteStatus = setRequestCompleteStatusMutation();
   const [showError, setShowError] = useState(false);
 
   const onHandleDelete = (id: string) => {
@@ -73,6 +74,29 @@ const Table = ({
     });
   };
 
+  const onHandleCompleteStatus = async (id: string, completeStatus: boolean) => {
+    try {
+      await doSetRequestCompleteStatus({
+        variables: {
+          id,
+          isFulfilled: !completeStatus
+        },
+        refetchQueries: () => [
+          {
+            query: QUERY_REQUESTS,
+            variables: {
+              charityId,
+            },
+          },
+        ],
+      });
+      setShowError(false);
+      refetch();
+    } catch (error) {
+      setShowError(true);
+    }
+  }
+
   if (data.length === 0) {
     return (
       <div className="no-data-text">
@@ -104,13 +128,13 @@ const Table = ({
                 <td>{item.requestTitle}</td>
                 <td>{item.neededDate}</td>
                 <td><DisplayDate dateString={item.createdAt}/></td>
-                <td>{item.isFulfilled === true ? "Yes" : "No"}</td>
+                <td>{item.isFulfilled === "true" ? "Yes" : "No"}</td>
                 <td>
                   <ul className="action-menu">
-                  <li>
-                      <Link to={"/charity/edit/" + item._id}>
-                        <i className="fas fa-check-square"></i>Mark as complete
-                      </Link>
+                    <li>
+                      <a onClick={() => onHandleCompleteStatus(item._id, item.isFulfilled === "true" ? true : false)}>
+                        {item.isFulfilled === "true" ? <><i className="far fa-check-square"></i>Mark as incomplete</> : <><i className="fas fa-check-square"></i>Mark as complete</>}
+                      </a>
                     </li>
                     <li>
                       <a onClick={() => onHandleDelete(item._id)}>

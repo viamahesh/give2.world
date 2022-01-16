@@ -64,6 +64,9 @@ const resolvers = {
     editCharity: async (_, args) => {
       return await Charity.findByIdAndUpdate(args.charityData._id, args.charityData, { new: true });
     },
+    setRequestCompleteStatus: async (_, args) => {
+      return await Request.findByIdAndUpdate(args._id, { isFulfilled: args.isFulfilled }, { new: true });
+    },
     deleteCharity: async (_, { _id }) => {
       let params = {};
       if (_id) {
