@@ -76,8 +76,7 @@ const Table = ({
   if (data.length === 0) {
     return (
       <div className="no-data-text">
-        <i className="fas fa-hourglass-start"></i>No charities available, please
-        add your charity to start the process.
+        <i className="fas fa-hourglass-start"></i>No requests available, please <Link to={"/request/add/" + charityId} className="highlight-text text-bold">add your request.</Link>
       </div>
     );
   }

@@ -31,10 +31,10 @@ a {
   text-align: center!important;
 }
 .text-bold {
-  font-weight: 600;
+  font-weight: 600 !important;
 }
 .highlight-text {
-  color: #f2797c;
+  color: #f2797c !important;
 }
 .framesheet {
   background: #fbf1e5 url("./assets/images/header-bg.png") 0 0 repeat-x;

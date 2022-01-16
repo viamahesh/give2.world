@@ -89,7 +89,10 @@ const AddRequest: React.FC = () => {
   return (
     <div className="framesheet">
       <div className="wrapper">
-        <Header breadcrumb={["Request Stuff"]} />
+        <Header breadcrumb={[{
+          title: "Manage Requests",
+          link: "/request/list/" + charityId
+        }, "Request Stuff"]} />
         <div className="page-container">
           {data.charity.charityName && (
             <p className="default-text">

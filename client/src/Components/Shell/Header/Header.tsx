@@ -1,13 +1,18 @@
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 
-import { UserContext } from '../../../providers';
-import AuthService from '../../../services/auth';
+import { UserContext } from "../../../providers";
+import AuthService from "../../../services/auth";
 
-import './header.css';
+import "./header.css";
+
+interface BreadcrumbLink {
+  title: string;
+  link: string;
+}
 
 interface Props {
-  breadcrumb?: Array<string>;
+  breadcrumb?: Array<BreadcrumbLink | string>;
 }
 
 const Header: React.FC<Props> = ({ breadcrumb }) => {
@@ -18,11 +23,11 @@ const Header: React.FC<Props> = ({ breadcrumb }) => {
   if (user) {
     firstName = user.data.firstName;
   }
-  
+
   const logout = () => {
     setUserData(null);
     AuthService.logout();
-  }
+  };
 
   return (
     <header>
@@ -51,27 +56,40 @@ const Header: React.FC<Props> = ({ breadcrumb }) => {
           )}
         </em>
       </span>
-      {isLoggedIn && <nav>
-        <ul className="breadcrumb">
-          <li>
-            <i className="fas fa-house-user"></i>
-            <Link to="/charity/list">
-              <span>
-                Dashboard
-              </span>
-            </Link>
-          </li>
-          {breadcrumb && breadcrumb.map((item: string, i) => {
-            return (
-              <li key={i}>
-                <i className="fas fa-caret-right"></i>
-                <span>{item}</span>
-              </li>
-            )
-            })
-          }
-        </ul>
-      </nav>}
+      {isLoggedIn && (
+        <nav>
+          <ul className="breadcrumb">
+            <li>
+              <i className="fas fa-house-user"></i>
+              <Link to="/charity/list">
+                <span>Dashboard</span>
+              </Link>
+            </li>
+            {breadcrumb &&
+              breadcrumb.map(
+                (item: string | { title: string; link: string }, i) => {
+                  if (typeof item === "string") {
+                    return (
+                      <li key={i}>
+                        <i className="fas fa-caret-right"></i>
+                        <span>{item}</span>
+                      </li>
+                    );
+                  } else {
+                    return (
+                      <li key={i}>
+                        <i className="fas fa-caret-right"></i>
+                        <Link to={item["link"]}>
+                          <span>{item["title"]}</span>
+                        </Link>
+                      </li>
+                    );
+                  }
+                }
+              )}
+          </ul>
+        </nav>
+      )}
     </header>
   );
 };
