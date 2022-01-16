@@ -76,6 +76,7 @@ const resolvers = {
       } else {
         throw new Error('Missing ID for an delete operation');
       }
+      await Request.deleteMany({ charity_ID: _id });
       const res = await Charity.findByIdAndDelete(params);
       return res;
     },
