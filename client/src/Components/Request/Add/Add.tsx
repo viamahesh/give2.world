@@ -85,7 +85,7 @@ const AddRequest: React.FC = () => {
   });
 
   if (loading) return <span className="loading-ani"></span>;
-  console.log(data);
+
   return (
     <div className="framesheet">
       <div className="wrapper">
