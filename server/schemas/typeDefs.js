@@ -91,22 +91,18 @@ const typeDefs = gql`
 
   type Search {
     _id: ID!
-    charityName: String
-    city: String
-    state: String
-    zipCode: String
-    email: String
     requestTitle: String
     requestDescription: String
     neededDate: String
     createdAt: String!
+    charityData: [Charity]
   }
 
   type Query {
     charities(owner_ID: String): [Charity]
     requests(charity_ID: String): [Request]
     charity(_id: ID!): Charity
-    search: Search
+    search: [Search]
     user: User
   }
 

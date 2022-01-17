@@ -4,15 +4,17 @@ export const QUERY_SEARCH = gql`
   query search {
     search {
       _id
-      charityName
-      city
-      state
-      zipCode
-      email
       requestTitle
       requestDescription
       neededDate
       createdAt
+      charityData {
+        charityName
+        city
+        state
+        zipCode
+        email
+      }
     }
   }
 `;

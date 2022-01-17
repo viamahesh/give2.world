@@ -24,8 +24,9 @@ const requestSchema = new Schema({
     type: Array
   },
   charity_ID: {
-    type: String,
+    type: mongoose.Types.ObjectId,
     required: true,
+    ref: 'charities'
   },
   createdAt: {
     type: Date,
