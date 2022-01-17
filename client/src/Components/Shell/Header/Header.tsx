@@ -37,7 +37,7 @@ const Header: React.FC<Props> = ({ breadcrumb }) => {
         </span>
         <span>your charity to recieve stuff</span>
       </Link>
-      <Link to="/donate" className="header-nav donate-button">
+      <Link to="/search" className="header-nav donate-button">
         <span>
           <i className="fas fa-heart"></i>Donate
         </span>

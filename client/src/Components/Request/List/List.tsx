@@ -32,7 +32,7 @@ const RequestList = () => {
       <div className="wrapper">
         <Header breadcrumb={['Manage Requests']} />
         <div className="page-container">
-        <p className="page-text">
+          <p className="page-text">
             <span className="page-title">Manage Requests:</span> The list below shows all your
             requests and also the options to manage them.
           </p>

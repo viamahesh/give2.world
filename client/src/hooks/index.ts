@@ -9,3 +9,4 @@ export { default as setRequestCompleteStatusMutation } from './useSetRequestComp
 export { QUERY_CHARITIES, default as charityListQuery } from './useCharityListQuery';
 export { QUERY_REQUESTS, default as requestListQuery } from './useRequestListQuery';
 export { default as charityQuery } from './useCharityQuery';
+export { default as searchListQuery } from './useSearchListQuery';

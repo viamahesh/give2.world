@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { useFormik } from "formik";
-import MaskedInput from "react-text-mask";
-import { toast } from "react-toast";
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useFormik } from 'formik';
+import MaskedInput from 'react-text-mask';
+import { toast } from 'react-toast';
 
-import { Header, Footer } from "../../Shell";
-import { addRequestMutation, charityQuery } from "../../../hooks";
+import { Header, Footer } from '../../Shell';
+import { addRequestMutation, charityQuery } from '../../../hooks';
 
-import "./add.css";
+import './add.css';
 
 interface FormValues {
   requestTitle: string;
@@ -37,7 +37,7 @@ const AddRequest: React.FC = () => {
   }, [error]);
 
   const isFutureDate = (date: string) => {
-    let dateArr: string[] = date.split("-");
+    let dateArr: string[] = date.split('-');
     let inputDate = new Date(`${dateArr[2]}-${dateArr[0]}-${dateArr[1]}`);
     let currentDate = new Date();
     return inputDate > currentDate ? true : false;
@@ -47,22 +47,22 @@ const AddRequest: React.FC = () => {
     setShowError(false);
     const errors: FormErrors = {};
     if (!values.requestTitle || values.requestTitle.length < 5) {
-      errors.requestTitle = "Title name is required";
+      errors.requestTitle = 'Title name is required';
     }
     if (!values.requestDescription || values.requestDescription.length < 5) {
-      errors.requestDescription = "Description is required";
+      errors.requestDescription = 'Description is required';
     }
     if (values.neededDate && !isFutureDate(values.neededDate)) {
-      errors.neededDate = "Needed date must be in the future";
+      errors.neededDate = 'Needed date must be in the future';
     }
     return errors;
   };
 
   const formik = useFormik({
     initialValues: {
-      requestTitle: "",
-      requestDescription: "",
-      neededDate: "",
+      requestTitle: '',
+      requestDescription: '',
+      neededDate: '',
     },
     validate,
     onSubmit: async (values) => {
@@ -77,7 +77,7 @@ const AddRequest: React.FC = () => {
           variables: { ...updateValues },
         });
         toast.success(`Request added successfully`);
-        navigate("/request/list/" + charityId);
+        navigate('/request/list/' + charityId);
       } catch (e) {
         console.log(e);
       }

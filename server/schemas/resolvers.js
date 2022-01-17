@@ -32,6 +32,19 @@ const resolvers = {
         return user;
       }
       throw new AuthenticationError('Not logged in');
+    },
+    search: async () => {
+      let res = null;
+      res = await Request.aggregate([{
+        $lookup: {
+            from: 'charities',
+            localField: 'charity_ID',
+            foreignField: '_id',
+            as: 'charityData'
+        }
+      }]);
+      console.log(res);
+      return res;
     }
   },
   Mutation: {

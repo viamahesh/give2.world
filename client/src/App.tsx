@@ -12,6 +12,7 @@ import { PrivateRoute, LoggedInRedirectRoute } from './Components/Shared';
 
 import { AddCharity, EditCharity, CharityList } from './Components/Charity';
 import { AddRequest, RequestList } from './Components/Request';
+import { Search } from './Components/Search';
 import { Home } from './Components/Home';
 import { Login, SignUp } from './Components/User';
 import { UserProvider } from './providers';
@@ -47,6 +48,7 @@ const App = () => {
         <Router>
           <Routes>
             <Route path="/" element={<Home />}></Route>
+            <Route path="/search" element={<Search />}></Route>
             <Route path="/charity/add" element={<PrivateRoute />}>
               <Route path="/charity/add" element={<AddCharity />} />
             </Route>
