@@ -1,0 +1,12 @@
+.rdt_TableHeadRow {
+  background: #42bfd8 !important;
+  color: #faf0e4;
+}
+.rdt_TableRow .rdt_TableCell,
+.rdt_TableHeadRow .rdt_TableCol {
+  border-right: 1px solid #dddddd;
+}
+.rdt_TableRow .rdt_TableCell:last-child,
+.rdt_TableHeadRow .rdt_TableCol:last-child {
+  border-right: none;
+}
