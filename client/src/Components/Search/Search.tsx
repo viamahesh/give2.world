@@ -63,7 +63,7 @@ const Search = () => {
     data: data.search,
     export: false,
     print: false,
-    filterPlaceholder: 'Filter list'
+    filterPlaceholder: 'Search table'
   };
 
   return (
