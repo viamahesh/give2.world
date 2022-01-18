@@ -22,8 +22,8 @@
   background: none !important;
   color: #858688 !important;
 }
-select {
-  background-color: #ffffff;
+.rdt_Pagination select {
+  background-color: inherit;
   border: none;
   border-radius: 0;
   box-shadow: none;
@@ -32,8 +32,11 @@ select {
   font-size: 14px;
   font-weight: 400;
   line-height: 26px;
-  padding: 0;
+  height: 26px;
   width: 30%;
+}
+.fQmYxz svg {
+  top: 5px !important;
 }
 .icon {
   display: none !important;
