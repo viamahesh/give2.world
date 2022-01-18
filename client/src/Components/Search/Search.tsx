@@ -25,7 +25,7 @@ const Search = () => {
       sortable: true,
     },
     {
-      name: 'Needed Date',
+      name: 'Needed On',
       selector: 'neededDate',
       sortable: true,
     },
@@ -54,7 +54,17 @@ const Search = () => {
       selector: 'charityData[0].email',
       sortable: true,
     },
+    {
+      name: 'Private Msg',
+      selector: '',
+      sortable: false,
+      cell: (d: any) => <a onClick={() => onReplyClick(d._id)}><i className="fas fa-reply"></i></a>
+    },
   ];
+
+  const onReplyClick = (id: string) => {
+    console.log(id);
+  }
 
   if (loading) return <span className="loading-ani"></span>;
 

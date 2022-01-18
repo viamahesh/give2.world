@@ -62,3 +62,6 @@ select {
   padding: 5px 15px !important;
   width: calc(100% - 30px) !important;
 }
+.bsgpsK div:first-child {
+  white-space: break-spaces !important;
+}
