@@ -42,6 +42,9 @@ select {
   margin-bottom: 15px;
   padding: 0;
 }
+.data-table-extensions-filter {
+  float: none !important;
+}
 .filter-text {
   background-color: #ffffff !important;
   border: none;
