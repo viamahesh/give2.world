@@ -18,7 +18,7 @@ const Footer: React.FC = () => {
             </Link>
           </li>
           <li>
-            <Link to="/donate">
+            <Link to="/search">
               <i className="fas fa-heart"></i>Donate
             </Link>
           </li>
@@ -34,11 +34,6 @@ const Footer: React.FC = () => {
               </Link>
             </li>
           )}
-          <li>
-            <Link to="/contact">
-              <i className="fas fa-address-card"></i>Contact
-            </Link>
-          </li>
           {!isLoggedIn && (
             <li>
             <Link to="/user/login">
@@ -46,6 +41,9 @@ const Footer: React.FC = () => {
             </Link>
           </li>
           )}
+          <li>
+            <i className="fas fa-address-card"></i>info@give2.world
+          </li>
         </ul>
         <p className="copyright">
           <span>
