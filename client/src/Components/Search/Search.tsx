@@ -71,17 +71,6 @@ const Search = () => {
       <div className="wrapper">
         <Header />
         <div className="page-container">
-          <DataTableExtensions {...tableData}>
-            <DataTable
-              /*// @ts-ignore */
-              columns={columns}
-              data={data}
-              noHeader
-              defaultSortAsc={false}
-              pagination
-              highlightOnHover
-            />
-          </DataTableExtensions>
           <p className="page-text">
             <span className="page-title">Donate goods to a charity:</span> Give
             2 World welcomes your donations of household goods, electronics,
@@ -94,6 +83,17 @@ const Search = () => {
             interested in supporting a local charity, you can use our search
             filters to find needy agencies within your local community.
           </p>
+          <DataTableExtensions {...tableData}>
+            <DataTable
+              /*// @ts-ignore */
+              columns={columns}
+              data={data}
+              noHeader
+              defaultSortAsc={false}
+              pagination
+              highlightOnHover
+            />
+          </DataTableExtensions>
           {showError && (
             <span className="error-text">
               <i className="fas fa-exclamation-circle"></i>
