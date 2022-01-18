@@ -30,7 +30,7 @@ const Search = () => {
       sortable: true,
     },
     {
-      name: 'Charity Name',
+      name: 'Charity',
       selector: 'charityData[0].charityName',
       sortable: true,
     },

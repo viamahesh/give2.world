@@ -5,6 +5,8 @@
 .rdt_TableRow .rdt_TableCell,
 .rdt_TableHeadRow .rdt_TableCol {
   border-right: 1px solid #dddddd;
+  font-size: 11px;
+  padding: 5px 10px;
 }
 .rdt_TableRow .rdt_TableCell:last-child,
 .rdt_TableHeadRow .rdt_TableCol:last-child {
