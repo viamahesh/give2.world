@@ -65,13 +65,15 @@ const Search = () => {
       return (
         // <a onClick={() => onReplyClick(d._id)}><i className="fas fa-reply"></i></a>
         <Popup trigger={<i className="fas fa-reply"></i>} modal>
-          <div className="comment-container">
-          <p className="page-text">
-            <span className="page-title">Send a message:</span> You are replying to {d.charityData[0].charityName} for request: {d.requestTitle}.
-          </p>
-          <Comment requestId={d._id} />
-          <em className="note-text">Your message is only visible to the charity administrator.</em>
-          </div>
+          {(close: any) => (
+              <div className="comment-container">
+            <p className="page-text">
+              <span className="page-title">Send a message:</span> You are replying to {d.charityData[0].charityName} for request: {d.requestTitle}.
+            </p>
+            <Comment requestId={d._id} closeModal={close} />
+            <em className="note-text">Your message is only visible to the charity administrator.</em>
+            </div>
+          )}
         </Popup>
       )
       }

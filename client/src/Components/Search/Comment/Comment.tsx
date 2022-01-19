@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { useFormik } from "formik";
-import { addCommentMutation } from "../../../hooks";
+import React, { useEffect, useState } from 'react';
+import { useFormik } from 'formik';
+import { addCommentMutation } from '../../../hooks';
 import { toast } from 'react-toast';
 
 interface FormValues {
@@ -13,7 +13,7 @@ interface FormErrors {
   message?: string;
 }
 
-const Comment = ({ requestId }: { requestId: string}) => {
+const Comment = ({ requestId, closeModal }: { requestId: string, closeModal: () => void }) => {
   const [showError, setShowError] = useState(false);
   const { doAddComment, error } = addCommentMutation();
   
@@ -29,18 +29,18 @@ const Comment = ({ requestId }: { requestId: string}) => {
     setShowError(false);
     const errors: FormErrors = {};
     if (!values.donorName || values.donorName.length < 5) {
-      errors.donorName = "Name is required";
+      errors.donorName = 'Name is required';
     }
     if (!values.message || values.message.length < 5) {
-      errors.message = "Message is required";
+      errors.message = 'Message is required';
     }
     return errors;
   };
 
   const formik = useFormik({
     initialValues: {
-      donorName: "",
-      message: "",
+      donorName: '',
+      message: '',
     },
     validate,
     onSubmit: async (values) => {
@@ -53,6 +53,7 @@ const Comment = ({ requestId }: { requestId: string}) => {
         const { data } = await doAddComment({
           variables: { ...updateValues },
         });
+        closeModal();
         toast.success(`Message recorded successfully`);
       } catch (e) {
         console.log(e);
