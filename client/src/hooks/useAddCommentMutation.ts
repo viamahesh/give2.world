@@ -3,15 +3,14 @@ import { useMutation } from "@apollo/client";
 
 export const ADD_COMMENT = gql`
   mutation addComment(
-    $requestId: ID!, $message: String!, $donorName: String!, $createdAt: String!
+    $requestId: String!, $message: String!, $donorName: String!
   ) {
     addComment (
       requestId: $requestId,
       message: $message,
       donorName: $donorName
-      createdAt: $createdAt
   ) {
-    _id
+    requestTitle
     }
   }
 `;

@@ -78,7 +78,7 @@ const resolvers = {
           comments: {
             donorName: args.donorName, 
             message: args.message,
-            createdAt: args.createdAt
+            createdAt: Date.now()
           }  
         } 
       }, 

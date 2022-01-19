@@ -47,9 +47,9 @@ const Comment = ({ requestId }: { requestId: string}) => {
       try {
         const updateValues = {
           ...values,
-          requestId,
-          createdAt: Date.now
+          requestId
         };
+        console.log(updateValues);
         const { data } = await doAddComment({
           variables: { ...updateValues },
         });

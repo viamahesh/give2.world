@@ -78,3 +78,6 @@
   padding: 15px;
   width: calc(100% - 30px);
 }
+.fa-reply:hover {
+  cursor: pointer;
+}

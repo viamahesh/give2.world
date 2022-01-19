@@ -112,7 +112,7 @@ const typeDefs = gql`
     deleteCharity(_id: ID!): Charity
     deleteRequest(_id: ID!): Request
     login(email: String!, password: String!): Auth
-    addComment(message: String!, donorName: String!, createdAt: String!): Comment
+    addComment(requestId: String!, message: String!, donorName: String!): Request
   }
 `;
 
