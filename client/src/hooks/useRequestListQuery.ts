@@ -11,6 +11,7 @@ export const QUERY_REQUESTS = gql`
       comments {
         message
         donorName
+        createdAt
       }
       charity_ID
       createdAt

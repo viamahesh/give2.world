@@ -186,14 +186,25 @@ const Table = ({
                           }
                           modal
                         >
-                          {item.comments.map((comment: any) => {
-                            return (
-                              <div className="comment-container">
-                                <p>{comment.donorName}</p>
-                                <p>{comment.message}</p>
-                              </div>
-                            );
-                          })}
+                          <div className="comment-data-container">
+                            <p className="page-text">
+                              <span className="page-title">Comments for:</span>{" "}
+                              You are reading comments received for:{" "}
+                              <span className="highlight-text text-bold">
+                                {item.requestTitle}
+                              </span>{" "}
+                              request.
+                            </p>
+                            {item.comments.map((comment: any) => {
+                              return (
+                                <div className="individual-comment">
+                                  <p><span className="highlight-text text-bold">Donor Name:</span> {comment.donorName}</p>
+                                  <p><span className="highlight-text text-bold">Message:</span> {comment.message}</p>
+                                  <p><span className="highlight-text text-bold">Date:</span> <DisplayDate dateString={comment.createdAt} /></p>
+                                </div>
+                              );
+                            })}
+                          </div>
                         </Popup>
                       </li>
                     )}

@@ -15,3 +15,14 @@
 .logout:hover {
   cursor: pointer;
 }
+.comment-data-container {
+  padding: 15px;
+}
+.individual-comment {
+  border-top: 1px solid #f1797c;
+  font-size: 12px;
+  padding: 10px 0;
+}
+.individual-comment p {
+  margin-bottom: 5px;
+}
