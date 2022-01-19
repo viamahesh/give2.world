@@ -9,7 +9,6 @@ export const QUERY_REQUESTS = gql`
       neededDate
       isFulfilled
       comments {
-        _id
         message
         donorName
       }
