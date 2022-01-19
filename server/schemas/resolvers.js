@@ -34,7 +34,13 @@ const resolvers = {
       throw new AuthenticationError('Not logged in');
     },
     search: async () => {
-      const res = await Request.aggregate([{
+      const res = await Request.aggregate([
+      { 
+        $match: { 
+          isFulfilled: false
+        },
+      },
+      {
         $lookup: {
           from: 'charities',
           localField: 'charity_ID',
