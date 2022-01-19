@@ -70,3 +70,11 @@
 .bsgpsK div:first-child {
   white-space: break-spaces !important;
 }
+.popup-content {
+  background: #faf0e4;
+  width: 530px;
+}
+.comment-container {
+  padding: 15px;
+  width: calc(100% - 30px);
+}

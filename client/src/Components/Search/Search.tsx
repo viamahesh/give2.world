@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
 import DataTable from 'react-data-table-component';
 /*
  // @ts-ignore */
@@ -6,6 +8,7 @@ import DataTableExtensions from 'react-data-table-component-extensions';
 import 'react-data-table-component-extensions/dist/index.css';
 
 import { Header, Footer } from '../Shell';
+import { Comment } from './Comment';
 import { searchListQuery } from '../../hooks';
 
 import './search.css';
@@ -58,7 +61,20 @@ const Search = () => {
       name: 'Private Msg',
       selector: '',
       sortable: false,
-      cell: (d: any) => <a onClick={() => onReplyClick(d._id)}><i className="fas fa-reply"></i></a>
+      cell: (d: any) => {
+      return (
+        // <a onClick={() => onReplyClick(d._id)}><i className="fas fa-reply"></i></a>
+        <Popup trigger={<i className="fas fa-reply"></i>} modal>
+          <div className="comment-container">
+          <p className="page-text">
+            <span className="page-title">Send a message:</span> You are replying to {d.charityData[0].charityName} for request: {d.requestTitle}.
+          </p>
+          <Comment />
+          <em className="note-text">Your message is only visible to the charity administrator.</em>
+          </div>
+        </Popup>
+      )
+      }
     },
   ];
 
@@ -113,6 +129,11 @@ const Search = () => {
         </div>
       </div>
       <Footer />
+
+
+      
+
+
     </div>
   );
 };

@@ -388,3 +388,10 @@ body.react-confirm-alert-body-element {
 .new-btn:hover{
   cursor: pointer;
 }
+.note-text {
+  float: left;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 600;
+  margin: 10px 0 15px 0;
+}
