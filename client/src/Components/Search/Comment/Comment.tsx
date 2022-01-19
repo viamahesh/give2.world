@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
+import { addCommentMutation } from "../../../hooks";
+import { toast } from 'react-toast';
 
 interface FormValues {
   donorName: string;
@@ -11,8 +13,17 @@ interface FormErrors {
   message?: string;
 }
 
-const Comment = () => {
+const Comment = ({ requestId }: { requestId: string}) => {
   const [showError, setShowError] = useState(false);
+  const { doAddComment, error } = addCommentMutation();
+  
+  useEffect(() => {
+    if (error) {
+      setShowError(true);
+    } else {
+      setShowError(false);
+    }
+  }, [error]);
 
   const validate = (values: FormValues) => {
     setShowError(false);
@@ -34,17 +45,15 @@ const Comment = () => {
     validate,
     onSubmit: async (values) => {
       try {
-        // const updateValues = {
-        //   ...values,
-        //   isFulfilled: false,
-        //   comments: [],
-        //   charity_ID: charityId,
-        // };
-        // const { data } = await doAddRequest({
-        //   variables: { ...updateValues },
-        // });
-        // toast.success(`Request added successfully`);
-        // navigate('/request/list/' + charityId);
+        const updateValues = {
+          ...values,
+          requestId,
+          createdAt: Date.now
+        };
+        const { data } = await doAddComment({
+          variables: { ...updateValues },
+        });
+        toast.success(`Message recorded successfully`);
       } catch (e) {
         console.log(e);
       }

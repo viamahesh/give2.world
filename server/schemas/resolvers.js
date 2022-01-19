@@ -72,6 +72,19 @@ const resolvers = {
       const res = await Request.create(args);
       return res;
     },
+    addComment: async (_, args) => {
+      const res = await Request.findByIdAndUpdate(args.requestId, { 
+        $push: { 
+          comments: {
+            donorName: args.donorName, 
+            message: args.message,
+            createdAt: args.createdAt
+          }  
+        } 
+      }, 
+      { new: true });
+      return res;
+    },
     editCharity: async (_, args) => {
       return await Charity.findByIdAndUpdate(args.charityData._id, args.charityData, { new: true });
     },

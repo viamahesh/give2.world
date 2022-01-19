@@ -66,16 +66,13 @@ const typeDefs = gql`
   input CommentInput {
     message: String!
     donorName: String!
-    donorPhone: String!
-    donorEmail: String!
+    createdAt: String!
   }
 
   type Comment {
-    _id: ID!
     message: String!
     donorName: String!
-    donorPhone: String!
-    donorEmail: String!
+    createdAt: String!
   }
 
   type Request {
@@ -115,6 +112,7 @@ const typeDefs = gql`
     deleteCharity(_id: ID!): Charity
     deleteRequest(_id: ID!): Request
     login(email: String!, password: String!): Auth
+    addComment(message: String!, donorName: String!, createdAt: String!): Comment
   }
 `;
 

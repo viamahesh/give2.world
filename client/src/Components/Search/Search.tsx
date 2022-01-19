@@ -69,7 +69,7 @@ const Search = () => {
           <p className="page-text">
             <span className="page-title">Send a message:</span> You are replying to {d.charityData[0].charityName} for request: {d.requestTitle}.
           </p>
-          <Comment />
+          <Comment requestId={d._id} />
           <em className="note-text">Your message is only visible to the charity administrator.</em>
           </div>
         </Popup>

@@ -12,8 +12,6 @@ export const QUERY_REQUESTS = gql`
         _id
         message
         donorName
-        donorPhone
-        donorEmail
       }
       charity_ID
       createdAt
