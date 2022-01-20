@@ -1,0 +1,28 @@
+.request-list-container {
+  width: 100%;
+}
+.request-list th:nth-child(1) {
+  width: 30%;
+}
+.request-list th:nth-child(2),
+.request-list th:nth-child(3),
+.request-list th:nth-child(5) {
+  width: 20%;
+}
+.request-list th:nth-child(4) {
+  width: 10%;
+}
+.logout:hover {
+  cursor: pointer;
+}
+.comment-data-container {
+  padding: 15px;
+}
+.individual-comment {
+  border-top: 1px solid #f1797c;
+  font-size: 12px;
+  padding: 10px 0;
+}
+.individual-comment p {
+  margin-bottom: 5px;
+}
