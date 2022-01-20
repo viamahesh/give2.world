@@ -1,0 +1,397 @@
+body {
+  color: #3f3c4d;
+  font-family: "Work Sans", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+div,
+p,
+span,
+h1,
+h2,
+h3,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
+ul,
+li {
+  list-style-type: none;
+}
+h1,
+h2,
+h3 {
+  font-weight: normal;
+}
+a {
+  text-decoration: none;
+}
+.text-center {
+  text-align: center!important;
+}
+.text-bold {
+  font-weight: 600 !important;
+}
+.highlight-text {
+  color: #f2797c !important;
+}
+.framesheet {
+  background: #fbf1e5 url("./assets/images/header-bg.png") 0 0 repeat-x;
+  width: 100%;
+}
+.wrapper {
+  margin: 0 auto;
+  width: 980px;
+}
+/* form css */
+label {
+  display: inline-block;
+  margin-bottom: 10px;
+}
+.form-group {
+  margin-bottom: 25px;
+}
+.react-datepicker__input-container input,
+.form-textarea,
+.form-control {
+  background-color: #ffffff;
+  border: none;
+  border-radius: 0.25rem;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+    rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+  color: #495057;
+  display: block;
+  font-family: "Work Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  height: 35px;
+  line-height: 35px;
+  padding: 5px 15px;
+  width: calc(100% - 30px);
+}
+.form-button {
+  background: #42bfd8;
+  border: 1px solid #2c8fa3;
+  border-radius: 0.25rem;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+    rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+  color: #faf0e4;
+  font-family: "Work Sans", sans-serif;
+  font-size: 20px;
+  line-height: 25px;
+  padding: 15px;
+}
+.form-button:hover {
+  cursor: pointer;
+}
+.select-container {
+  position: relative;
+}
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: #ffffff;
+  border: none;
+  border-radius: 0.25rem;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+    rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+  color: #495057;
+  font-family: "Work Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 35px;
+  padding: 5px 15px;
+  width: 100%;
+}
+/* For IE <= 11 */
+select::-ms-expand {
+  display: none;
+}
+.select-icon {
+  position: absolute;
+  top: 40px;
+  right: -4px;
+  width: 30px;
+  height: 36px;
+}
+.form-textarea {
+  height: 150px;
+  line-height: 22px;
+  resize: none;
+}
+/* headings */
+.page-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 30px 0;
+}
+.default-text {
+  flex-basis: 100%;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+.default-text i {
+  margin-right: 10px;
+}
+.page-form {
+  flex-basis: 45%;
+}
+.page-description {
+  flex-basis: 45%;
+}
+.page-title {
+  color: #3f3c4d;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+.page-text {
+  color: #858688;
+  font-size: 18px;
+  font-weight: 200;
+  line-height: 26px;
+  margin-bottom: 20px;
+}
+.error-text {
+  color: #b00020;
+  display: block;
+  font-size: 12px;
+  line-height: 18px;
+  margin-top: 10px;
+  width: 100%;
+}
+.error-text i {
+  margin-right: 10px;
+}
+.loading-ani {
+  background: url("./assets/images/loading.svg") 50% 50% no-repeat;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+}
+/* data table */
+.data-table {
+  border-collapse: collapse;
+  font-family: "Work Sans", sans-serif;
+  font-size: 12px;
+  width: 100%;
+}
+.data-table thead tr th {
+  background: #42bfd8;
+  color: #faf0e4;
+}
+.data-table tbody tr td,
+.data-table thead tr th {
+  border: 1px solid #dddddd;
+  max-width: 0;
+  overflow: hidden;
+  padding: 15px;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.data-table tbody tr:last-of-type {
+  border-bottom: 2px solid #f2797a;
+}
+.data-table tbody tr:nth-child(even) {
+  background: #f2f2f2;
+}
+.data-table tbody tr:nth-child(odd) {
+  background: #ffffff;
+}
+/* action menu */
+.action-menu li {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 0;
+}
+.action-menu li a {
+  color: #c88170;
+  cursor: pointer;
+}
+.action-menu li a i {
+  margin-right: 10px;
+}
+/* react confirm modal */
+body.react-confirm-alert-body-element {
+  overflow: hidden;
+}
+.react-confirm-alert-blur {
+  filter: url(#gaussian-blur);
+  filter: blur(2px);
+  -webkit-filter: blur(2px);
+}
+.react-confirm-alert-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99;
+  background: rgba(255, 255, 255, 0.9);
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  justify-content: center;
+  -ms-align-items: center;
+  align-items: center;
+  opacity: 0;
+  -webkit-animation: react-confirm-alert-fadeIn 0.5s 0.2s forwards;
+  -moz-animation: react-confirm-alert-fadeIn 0.5s 0.2s forwards;
+  -o-animation: react-confirm-alert-fadeIn 0.5s 0.2s forwards;
+  animation: react-confirm-alert-fadeIn 0.5s 0.2s forwards;
+}
+.react-confirm-alert-body {
+  font-family: Arial, Helvetica, sans-serif;
+  width: 400px;
+  padding: 30px;
+  text-align: left;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 20px 75px rgba(0, 0, 0, 0.13);
+  color: #666;
+}
+.react-confirm-alert-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.react-confirm-alert-body > h1 {
+  margin-top: 0;
+}
+.react-confirm-alert-body > h3 {
+  margin: 0;
+  font-size: 16px;
+}
+.react-confirm-alert-button-group {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 20px;
+}
+.react-confirm-alert-button-group > button {
+  outline: none;
+  background: #333;
+  border: none;
+  display: inline-block;
+  padding: 6px 18px;
+  color: #eee;
+  margin-right: 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  cursor: pointer;
+}
+@-webkit-keyframes react-confirm-alert-fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-moz-keyframes react-confirm-alert-fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-o-keyframes react-confirm-alert-fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes react-confirm-alert-fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.custom-ui {
+  width: 350px;
+  padding: 20px;
+  background: #f2797a;
+  box-shadow: 0 20px 75px rgba(0, 0, 0, 0.23);
+  color: #fff;
+}
+.custom-ui > h1 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+.custom-ui > p {
+  font-size: 12px;
+  margin-bottom: 15px;
+}
+.custom-ui > button {
+  background: none;
+  border: 1px solid #fff;
+  color: #fff;
+  cursor: pointer;
+  font-family: "Work Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 10px;
+  width: 120px;
+}
+.no-button {
+  margin-right: 10px;
+}
+.yes-button {
+  background: #b00020!important;
+}
+.no-data-text,
+.error-text {
+  color: #b00020;
+  display: block;
+  font-size: 12px;
+  line-height: 18px;
+  margin-top: 10px;
+  width: 100%;
+}
+.no-data-text i,
+.error-text i {
+  margin-right: 10px;
+}
+.new-btn {
+  background: #ffffff;
+  border: 2px solid #ff99cc;
+  border-radius: 5px;
+  color: #f2797c;
+  font-family: "Work Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 12px;
+  margin-left: 10px;
+  padding: 3px 5px;
+}
+.new-btn i {
+  margin-right: 5px;
+}
+.new-btn:hover{
+  cursor: pointer;
+}
+.note-text {
+  float: left;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 600;
+  margin: 10px 0 15px 0;
+}

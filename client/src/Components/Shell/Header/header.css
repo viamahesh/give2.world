@@ -1,0 +1,89 @@
+header {
+  background: url("../../../assets/images/g2w-logo.png") center no-repeat;
+  background-size: 160px 146px;
+  height: 158px;
+  position: relative;
+}
+.header-nav {
+  color: #ffffff;
+  position: absolute;
+  top: 33px;
+  width: 200px;
+}
+.header-nav span {
+  display: block;
+  width: 100%;
+}
+.header-nav span:nth-child(1) {
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.header-nav span:nth-child(1) i {
+  margin-right: 10px;
+}
+.header-nav span:nth-child(2) {
+  font-size: 12px;
+  font-weight: 400;
+  text-indent: 24px;
+}
+.add-button,
+.donate-button {
+  position: absolute;
+}
+.add-button {
+  left: 610px;
+}
+.donate-button {
+  left: 218px;
+}
+.logged-in-message {
+  font-size: 12px;
+  position: absolute;
+  right: 0;
+  top: 86px;
+}
+.logged-in-message em {
+  font-weight: 600;
+  font-style: normal;
+}
+.logged-in-message i {
+  margin-right: 10px;
+}
+.logged-in-message a {
+  color: #42bfd8;
+}
+.logout {
+  background: #42bfd8;
+  border: none;
+  border-radius: 0.25rem;
+  color: #faf0e4;
+  font-family: "Work Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 12px;
+  margin-left: 10px;
+  padding: 3px 5px;
+}
+.logout:hover {
+  cursor: pointer;
+}
+ul.breadcrumb {
+  left: 0;
+  position: absolute;
+  top: 82px;
+}
+ul.breadcrumb li {
+  color: #3f3c4d;
+  display: inline-block;
+  font-size: 12px;
+  padding: 0 5px;
+}
+ul.breadcrumb li a {
+  color: #42bfd8;
+  font-weight: 600;
+}
+ul.breadcrumb li i {
+  margin-right: 10px;
+}
+
