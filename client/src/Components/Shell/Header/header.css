@@ -5,10 +5,13 @@ header {
   position: relative;
 }
 header h1 {
-  height: 146px;
   left: 410px;
   position: absolute;
   top: 6px;
+}
+header h1 a {
+  display: block;
+  height: 146px;
   width: 160px;
 }
 header h1 em {
