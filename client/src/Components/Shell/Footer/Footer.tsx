@@ -47,7 +47,7 @@ const Footer: React.FC = () => {
         </ul>
         <p className="copyright">
           <span>
-            <em>Give2.world</em> (c) 2015 - Forever
+            <em>Give2World</em> (c) 2015 - Forever
           </span>
           <span>
             Vector illustrations courtesy of <em>freepik.com</em>
