@@ -87,7 +87,7 @@ const SignUp = () => {
           variables: { ...values },
         });
         Auth.login(data.login.token);
-        navigate('/');
+        navigate('/charity/list');
       } catch (e: any) {
         if (e.message.includes('There was a duplicate key error')) setCustomErrorMessage(`An account with email address ${formik.values.email} already exists, Please login using this email address`);
       }
