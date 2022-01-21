@@ -33,6 +33,10 @@ const resolvers = {
       }
       throw new AuthenticationError('Not logged in');
     },
+    charityOwner: async (_, { _id }) => {
+      const user = await User.findById(_id);
+      return user;
+    },
     search: async () => {
       const res = await Request.aggregate([
       { 

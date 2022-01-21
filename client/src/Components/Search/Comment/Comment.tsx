@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { useFormik } from 'formik';
-import { addCommentMutation } from '../../../hooks';
-import { toast } from 'react-toast';
+import React, { useEffect, useState } from "react";
+import { useFormik } from "formik";
+import { addCommentMutation } from "../../../hooks";
+import { toast } from "react-toast";
+import emailjs from "emailjs-com";
+
+import { charityOwnerQuery } from "../../../hooks";
 
 interface FormValues {
   donorName: string;
@@ -13,10 +16,21 @@ interface FormErrors {
   message?: string;
 }
 
-const Comment = ({ requestId, closeModal }: { requestId: string, closeModal: () => void }) => {
+const Comment = ({
+  requestId,
+  requestTitle,
+  ownerId,
+  closeModal,
+}: {
+  requestId: string;
+  requestTitle: string;
+  ownerId: string;
+  closeModal: () => void;
+}) => {
   const [showError, setShowError] = useState(false);
   const { doAddComment, error } = addCommentMutation();
-  
+  const { data: charityOwnerData } = charityOwnerQuery(ownerId);
+  console.log(charityOwnerData);
   useEffect(() => {
     if (error) {
       setShowError(true);
@@ -29,31 +43,53 @@ const Comment = ({ requestId, closeModal }: { requestId: string, closeModal: () 
     setShowError(false);
     const errors: FormErrors = {};
     if (!values.donorName || values.donorName.length < 5) {
-      errors.donorName = 'Name is required';
+      errors.donorName = "Name is required";
     }
     if (!values.message || values.message.length < 5) {
-      errors.message = 'Message is required';
+      errors.message = "Message is required";
     }
     return errors;
   };
 
   const formik = useFormik({
     initialValues: {
-      donorName: '',
-      message: '',
+      donorName: "",
+      message: "",
     },
     validate,
     onSubmit: async (values) => {
       try {
         const updateValues = {
           ...values,
-          requestId
+          requestId,
         };
         console.log(updateValues);
         const { data } = await doAddComment({
           variables: { ...updateValues },
         });
         closeModal();
+        const templateParams = {
+          to_email: charityOwnerData.charityOwner.email,
+          to_name: charityOwnerData.charityOwner.firstName,
+          request_name: requestTitle,
+          donor_name: values.donorName,
+          message: values.message,
+        };
+        emailjs
+          .send(
+            "service_1vmuoah",
+            "template_0hc3wwj",
+            templateParams,
+            "user_H55sPMRsY8pP8ln6ice4m"
+          )
+          .then(
+            (response) => {
+              console.log("SUCCESS!", response.status, response.text);
+            },
+            (err) => {
+              console.log("FAILED...", err);
+            }
+          );
         toast.success(`Message recorded successfully`);
       } catch (e) {
         console.log(e);

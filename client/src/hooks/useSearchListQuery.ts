@@ -14,6 +14,7 @@ export const QUERY_SEARCH = gql`
         state
         zipCode
         email
+        owner_ID
       }
     }
   }

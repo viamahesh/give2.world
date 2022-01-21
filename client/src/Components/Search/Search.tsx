@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import DataTable from 'react-data-table-component';
@@ -70,7 +70,7 @@ const Search = () => {
             <p className="page-text">
               <span className="page-title">Send a message:</span> You are replying to {d.charityData[0].charityName} for request: {d.requestTitle}.
             </p>
-            <Comment requestId={d._id} closeModal={close} />
+            <Comment requestId={d._id} requestTitle={d.requestTitle} ownerId={d.charityData[0].owner_ID} closeModal={close} />
             <em className="note-text">Your message is only visible to the charity administrator.</em>
             </div>
           )}
@@ -80,9 +80,13 @@ const Search = () => {
     },
   ];
 
-  const onReplyClick = (id: string) => {
-    console.log(id);
-  }
+  useEffect(() => {
+    if (error) {
+      setShowError(true);
+    } else {
+      setShowError(false);
+    }
+  }, [error]);
 
   if (loading) return <span className="loading-ani"></span>;
 
