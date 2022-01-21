@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 
 import { Footer, Header } from '../../Shell';
 import { signUpMutation } from '../../../hooks';
+import { UserContext } from '../../../providers';
 
 import Auth from '../../../services/auth';
 
@@ -27,6 +28,7 @@ const SignUp = () => {
   const { doSignUp, error } = signUpMutation();
   const [showError, setShowError] = useState(false);
   const [customErrorMessage, setCustomErrorMessage] = useState('');
+  const { setUserData } = useContext(UserContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -86,7 +88,8 @@ const SignUp = () => {
         const { data } = await doSignUp({
           variables: { ...values },
         });
-        Auth.login(data.login.token);
+        setUserData(data.signUp);
+        Auth.login(data.signUp.token);
         navigate('/charity/list');
       } catch (e: any) {
         if (e.message.includes('There was a duplicate key error')) setCustomErrorMessage(`An account with email address ${formik.values.email} already exists, Please login using this email address`);
