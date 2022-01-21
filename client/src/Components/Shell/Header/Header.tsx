@@ -46,7 +46,7 @@ const Header: React.FC<Props> = ({ breadcrumb }) => {
       <span className="logged-in-message">
         <i className="fas fa-user"></i>Welcome,{" "}
         <em onClick={logout}>
-          {firstName ? (
+          {isLoggedIn ? (
             <>
               {firstName}
               <span className="logout">Logout</span>
