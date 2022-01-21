@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useFormik } from 'formik';
+// @ts-ignore
 import MaskedInput from 'react-text-mask';
 import { toast } from 'react-toast';
 
