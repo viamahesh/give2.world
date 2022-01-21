@@ -19,6 +19,7 @@ import { UserProvider } from './providers';
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
+  // uri: `http://localhost:3001/graphql `,
   uri: `/graphql `,
 });
 
