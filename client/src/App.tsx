@@ -18,7 +18,6 @@ import { Login, SignUp } from './Components/User';
 import { UserProvider } from './providers';
 
 const PORT = process.env.PORT || 3001;
-
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
   uri: `http://${window.location.hostname}:${PORT}/graphql `,
