@@ -4,6 +4,16 @@ header {
   height: 158px;
   position: relative;
 }
+header h1 {
+  height: 146px;
+  left: 410px;
+  position: absolute;
+  top: 6px;
+  width: 160px;
+}
+header h1 em {
+  visibility: hidden;
+}
 .header-nav {
   color: #ffffff;
   position: absolute;
@@ -60,7 +70,7 @@ header {
   color: #faf0e4;
   font-family: "Work Sans", sans-serif;
   font-size: 12px;
-  font-weight: 400;
+  font-weight: 600;
   line-height: 12px;
   margin-left: 10px;
   padding: 3px 5px;

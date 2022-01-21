@@ -31,6 +31,11 @@ const Header: React.FC<Props> = ({ breadcrumb }) => {
 
   return (
     <header>
+      <h1>
+        <Link to="/">
+          <em>Give 2 World</em>
+        </Link>
+      </h1>
       <Link to="/charity/add" className="header-nav add-button">
         <span>
           <i className="fas fa-thumbs-up"></i>Add
@@ -45,16 +50,18 @@ const Header: React.FC<Props> = ({ breadcrumb }) => {
       </Link>
       <span className="logged-in-message">
         <i className="fas fa-user"></i>Welcome,{" "}
-        <em onClick={logout}>
-          {isLoggedIn ? (
-            <>
-              {firstName}
-              <span className="logout">Logout</span>
-            </>
-          ) : (
-            <Link to="/user/login">Log in</Link>
-          )}
-        </em>
+        {isLoggedIn ? (
+          <>
+            <em>{firstName}</em>
+            <span className="logout">
+              <em onClick={logout}>Logout</em>
+            </span>
+          </>
+        ) : (
+          <Link to="/user/login">
+            <em>Log in</em>
+          </Link>
+        )}
       </span>
       {isLoggedIn && (
         <nav>
