@@ -50,10 +50,10 @@ const Footer: React.FC = () => {
             <em>Give2World</em> (c) 2015 - Forever
           </span>
           <span>
-            Vector illustrations courtesy of <em>freepik.com</em>
+            Vector illustrations courtesy of <a className="footer-link" href="https://www.freepik.com/" target="_blank">freepik.com</a>
           </span>
           <span>
-            Website developed by <em>Mahesh Rodrigo</em>
+            Website developed by <a className="footer-link" href="https://maheshrodrigo.github.io/" target="_blank">Mahesh Rodrigo</a>
           </span>
         </p>
       </div>
