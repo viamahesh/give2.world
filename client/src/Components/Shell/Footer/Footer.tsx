@@ -42,7 +42,7 @@ const Footer: React.FC = () => {
           </li>
           )}
           <li>
-            <i className="fas fa-address-card"></i>info@give2.world
+            <i className="fas fa-address-card"></i>info@give2world.org
           </li>
         </ul>
         <p className="copyright">
