@@ -1,4 +1,5 @@
 .request-list-container {
+  overflow: auto;
   width: 100%;
 }
 .request-list th:nth-child(1) {

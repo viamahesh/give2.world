@@ -1,4 +1,5 @@
 .charity-list-container {
+  overflow: auto;
   width: 100%;
 }
 .charity-list th:nth-child(1),
