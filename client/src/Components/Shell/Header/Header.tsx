@@ -49,7 +49,7 @@ const Header: React.FC<Props> = ({ breadcrumb }) => {
         <span>stuff to a near charity</span>
       </Link>
       <span className="logged-in-message">
-        <i className="fas fa-user"></i>Welcome,{" "}
+        <i className="fas fa-user"></i>
         {isLoggedIn ? (
           <>
             <em>{firstName}</em>
