@@ -92,7 +92,7 @@ const Search = () => {
 
   const tableData = {
     columns,
-    data: data.search,
+    data: data?.search,
     export: false,
     print: false,
     filterPlaceholder: 'Search table'
